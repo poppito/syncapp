@@ -1,0 +1,115 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:paddingTop="30dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="60dp"
+        android:paddingRight="40dp"
+        android:background="@color/embryio"
+        tools:context=".MainActivity">
+
+    	
+        <TableRow
+          	android:id="@+id/tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    	
+    	<TextView
+            android:id="@+id/embryio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            android:textSize="22sp"
+           	android:textColor="@color/titletextcolour"
+            android:textAlignment="center"
+            android:text="@string/logon">
+    	</TextView>
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+	    <EditText
+	        android:id="@+id/username"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/username" />
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/tablerow2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+
+	        <EditText
+	            android:id="@+id/password"
+	            android:inputType="textPassword"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/password" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tablerow3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingBottom="5dp"
+	        android:layout_marginRight="26dp" >
+             <Button
+	            android:id="@+id/logonbutton"
+	            android:contentDescription="@string/logonbutton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	           	android:textColor="@color/titletextcolour"
+	           	android:background="@color/bg"
+	            android:text="@string/logonbutton" />
+             </TableRow>
+             <TableRow
+            android:id="@+id/tablerow5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	          android:paddingBottom="5dp"
+	        android:layout_marginRight="26dp" >
+             <Button
+	            android:id="@+id/resetbutton"
+	            android:contentDescription="@string/resetbutton"
+	            android:layout_width="wrap_content"
+	            android:textColor="@color/titletextcolour"
+	            android:layout_height="wrap_content"
+	            android:background="@color/bg"
+	            android:text="@string/resetbutton" />
+             </TableRow>
+         <TableRow 
+             android:id="@+id/tablerow4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+             
+          <CheckBox 
+              android:id="@+id/remembercheck"
+              android:textColor="@color/bg"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/rememberpref"
+              />
+          </TableRow>
+          
+         <TableRow
+          	android:id="@+id/tableRow9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    	
+    	<TextView
+            android:id="@+id/logonstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+           	android:textColor="@color/titletextcolour"
+           	android:textAlignment="center"
+            android:text="@string/logonstatus">
+    	</TextView>
+        </TableRow>
+
+    </TableLayout>

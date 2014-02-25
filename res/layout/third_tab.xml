@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/embryio"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   	android:textColor="@color/embryio"
+	android:background="@color/bg"
+    android:id="@+id/eselectall"
+    android:paddingLeft="10dp"
+    android:textSize="13sp"
+    android:text="@string/selectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:id="@+id/edeselectall"
+    android:paddingLeft="10dp"
+    android:textColor="@color/embryio"
+    android:textSize="13sp"
+    android:layout_toRightOf="@id/eselectall"
+    android:text="@string/deselectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/unsyncme"
+    android:textColor="@color/embryio"
+    android:background="@color/bg"
+    android:paddingLeft="10dp"
+    android:textSize="13sp"
+    android:layout_toRightOf="@id/edeselectall"
+    android:text="@string/unsyncme">
+</Button>
+
+<ListView 
+        android:id="@+id/embryiocontacts"
+        android:background="@color/embryio"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/edeselectall"
+        android:layout_centerInParent="true">  
+    </ListView>
+
+</RelativeLayout>

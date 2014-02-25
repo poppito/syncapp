@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/embryio"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   	android:textColor="@color/embryio"
+	android:background="@color/bg"
+    android:id="@+id/selectall"
+    android:paddingLeft="10dp"
+    android:text="@string/selectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:id="@+id/deselectall"
+    android:paddingLeft="10dp"
+    android:textColor="@color/embryio"
+    android:layout_toRightOf="@id/selectall"
+    android:text="@string/deselectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/syncme"
+    android:textColor="@color/embryio"
+    android:background="@color/bg"
+    android:paddingLeft="10dp"
+    android:layout_toRightOf="@id/deselectall"
+    android:text="@string/syncme">
+</Button>
+	
+<ListView 
+        android:id="@+id/listcontacts"
+        android:background="@color/embryio"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/selectall"
+        android:layout_centerInParent="true">  
+    </ListView>
+
+</RelativeLayout>

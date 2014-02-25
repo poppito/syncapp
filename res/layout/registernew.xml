@@ -1,0 +1,93 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:paddingTop="100dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="60dp"
+        android:paddingRight="40dp"
+        android:background="@color/embryio"
+        tools:context=".MainActivity">
+
+        <TableRow
+            android:id="@+id/registertableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+	    <EditText
+	        android:id="@+id/registerusername"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/username" />
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/registertablerow2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+
+	        <EditText
+	            android:id="@+id/registerpassword"
+	            android:inputType="textPassword"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/password" />
+        </TableRow>
+         <TableRow
+	        android:id="@+id/registertablerow3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+	        <EditText
+	            android:id="@+id/registeremail"
+	            android:inputType="textEmailAddress"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/emailaddress" />
+	        
+	        </TableRow>
+        <TableRow
+            android:id="@+id/registertablerow4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+             <Button
+	            android:id="@+id/submitbutton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/embryio"
+	           	android:background="@color/bg"
+	            android:text="@string/submitbutton" />
+             </TableRow>
+         <TableRow 
+             android:id="@+id/registertablerow5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+             
+          <CheckBox 
+              android:id="@+id/remembercheck"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/bg"
+              android:text="@string/rememberpref"
+              />
+          </TableRow>
+          
+           <TableRow 
+            android:id="@+id/registertablerow6"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="26dp" >
+             
+          <TextView 
+              android:id="@+id/register_status"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/bg"
+              android:text="@string/register_status"
+              />
+          </TableRow>
+
+    </TableLayout>

@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/embryio"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+<Button
+    android:background="@color/bg"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="@string/updatesavailable"
+    android:textColor="@color/embryio"
+    android:id="@+id/updatesavailable"
+    >
+</Button>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   	android:textColor="@color/embryio"
+	android:background="@color/bg"
+    android:id="@+id/uselectall"
+    android:paddingLeft="10dp"
+    android:text="@string/selectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:id="@+id/udeselectall"
+    android:paddingLeft="10dp"
+    android:textColor="@color/embryio"
+    android:layout_toRightOf="@id/uselectall"
+    android:text="@string/deselectall">
+</Button>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/usyncme"
+    android:textColor="@color/embryio"
+    android:background="@color/bg"
+    android:paddingLeft="10dp"
+    android:layout_toRightOf="@id/udeselectall"
+    android:text="@string/syncme">
+</Button>
+<ListView 
+    	android:layout_below="@id/udeselectall"
+        android:id="@+id/listcontacts1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true">  
+    </ListView>
+
+</RelativeLayout>
