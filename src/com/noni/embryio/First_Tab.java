@@ -32,16 +32,20 @@ import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.RawContacts;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class First_Tab extends Fragment implements OnClickListener, UpdateableFragment {
 	
 	private ListView syncStatusList;
-	private Button updatesAvailable;
+	private Button retrieveContacts, updatesAvailable;
 	private static final String TAG = "GetSyncStatus";
 	private static String testURL1 = Constants.SERVERURL + "getsyncedcontacts";
 	private static String testURL2 = Constants.SERVERURL + "getsyncstatus";
@@ -393,6 +397,8 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 					int deleted = 0;
 					JSONObject obj = new JSONObject();
 					obj = values.getJSONObject(i);
+					
+	
 						
 						if (obj.getString("contact_name") != null)
 						

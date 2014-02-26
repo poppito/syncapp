@@ -4,3 +4,5 @@
 *.jar
 
 *.dex
+
+src/com/noni/embryio/Constants.java
