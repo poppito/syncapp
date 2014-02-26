@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/embryio"
+    android:background="@color/bg"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content">
     
@@ -8,21 +8,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
    	android:textColor="@color/embryio"
-	android:background="@color/bg"
-    android:id="@+id/selectall"
-    android:paddingLeft="10dp"
-    android:text="@string/selectall">
+   	android:background="@drawable/ic_action_select_all"
+   	android:paddingLeft="@dimen/paddingLeft"
+    android:id="@+id/selectall">
 </Button>
 
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/bg"
+    android:background="@drawable/ic_action_undo"
     android:id="@+id/deselectall"
     android:paddingLeft="10dp"
     android:textColor="@color/embryio"
-    android:layout_toRightOf="@id/selectall"
-    android:text="@string/deselectall">
+    android:layout_toRightOf="@id/selectall">
 </Button>
 
 <Button
@@ -30,10 +28,9 @@
     android:layout_height="wrap_content"
     android:id="@+id/syncme"
     android:textColor="@color/embryio"
-    android:background="@color/bg"
+    android:background="@drawable/ic_action_cloud"
     android:paddingLeft="10dp"
-    android:layout_toRightOf="@id/deselectall"
-    android:text="@string/syncme">
+    android:layout_toRightOf="@id/deselectall">
 </Button>
 	
 <ListView 

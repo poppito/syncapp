@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<EditTextPreference
+    android:title="Username"
+    android:key="username"
+    android:summary="Enter your username">
+</EditTextPreference>
+
+<EditTextPreference
+    android:title="Password"
+    android:password="true"
+    android:key="password"
+    android:summary="Enter your password">
+</EditTextPreference>
+
+<CheckBoxPreference 
+    android:title="save and remember logon"
+    android:key="rememberpref"
+    />
+
+</PreferenceScreen>

@@ -11,7 +11,6 @@
 	android:background="@color/bg"
     android:id="@+id/eselectall"
     android:paddingLeft="10dp"
-    android:textSize="13sp"
     android:text="@string/selectall">
 </Button>
 
@@ -22,7 +21,6 @@
     android:id="@+id/edeselectall"
     android:paddingLeft="10dp"
     android:textColor="@color/embryio"
-    android:textSize="13sp"
     android:layout_toRightOf="@id/eselectall"
     android:text="@string/deselectall">
 </Button>
@@ -34,7 +32,6 @@
     android:textColor="@color/embryio"
     android:background="@color/bg"
     android:paddingLeft="10dp"
-    android:textSize="13sp"
     android:layout_toRightOf="@id/edeselectall"
     android:text="@string/unsyncme">
 </Button>
