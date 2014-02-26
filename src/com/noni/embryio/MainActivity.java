@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	   private ViewPager viewPager;
 	   private TabsPagerAdapter mAdapter;
 	   public static final String mPassedString = "passedString";
-	   private String[] Tabs = { "First_Tab", "Second Tab", "Third_Tab" };
+	   private int[] Tabs = { R.drawable.ic_actionbar_tab_download, R.drawable.ic_actionbar_tab_upload, R.drawable.ic_actionbar_tab_delete };
 	   public ActionBar actionBar;
 	   final static String TAG = "MainActivity";
 	
@@ -38,11 +38,15 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
         actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_TABS);
-        for (String tab_name: Tabs)
+        
+        for (int tab_name: Tabs)
         {
-        	actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
+        	Tab t = actionBar.newTab();
+        	actionBar.addTab(t.setIcon(tab_name).setTabListener(this));
         }
         viewPager.setOnPageChangeListener(this);
         

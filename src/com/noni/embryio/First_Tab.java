@@ -96,9 +96,8 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 	            Bundle savedInstanceState) {
 	 
 	        View rootView = inflater.inflate(R.layout.get_sync_status, container, false);
-			updatesAvailable = (Button)rootView.findViewById(R.id.updatesavailable);
+
 			syncStatusList = (ListView)rootView.findViewById(R.id.listcontacts1);
-			updatesAvailable.setOnClickListener(this);
 			uselectall = (Button)rootView.findViewById(R.id.uselectall);
 			udeselectall = (Button)rootView.findViewById(R.id.udeselectall);
 			usyncme = (Button)rootView.findViewById(R.id.usyncme);
@@ -108,8 +107,6 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 	        return rootView;
 	
 	 }
-	 
-	 
 	 
 		public class HttpMethodTask extends AsyncTask<String, Void, String> {
 

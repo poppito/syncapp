@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Embryio</string>
-    <string name="newviewbitches">newViewBitches</string>
-    <string name="button0">SuxBro</string>
-      <string name="button1">NoBro</string>
-        <string name="button2">YesBro</string>
-          <string name="button3">ExitBro</string>
-            <string name="backbutton">Back</string>
+    <string name="app_name">embry.io</string>
     <string name="First">First</string>
     <string name="notathing">Nothing to see here, not a thing!</string>
     <color name="background">#000000</color>
@@ -41,6 +35,9 @@
      <string name="unsyncme">unsync selected items</string>
      <string name="register_status"></string>
      <string name="progressbar"/>
-    
+         <dimen name="iconSize">48dp</dimen>
+    <dimen name="tvSizeFull">58dp</dimen>
+    <dimen name="tvSizeHalf">29dp</dimen>
+    <dimen name="tvHeight">48dp</dimen>
 
 </resources>

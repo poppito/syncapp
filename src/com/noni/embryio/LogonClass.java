@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +49,7 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 	int TIMEOUT_MILLSEC = 10000;
 	public static MyHttpClient Client = new MyHttpClient(null);
 	public ProgressDialog mProgressDialog;
+	private ActionBar actionBar;
 	
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -61,6 +63,9 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		resetButton = (Button)findViewById(R.id.resetbutton);
 		logonButton.setOnClickListener(this);
 		resetButton.setOnClickListener(this);
+		actionBar = getActionBar();
+		actionBar.hide();
+		
 	}
 	
 	@Override
