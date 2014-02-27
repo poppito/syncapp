@@ -54,6 +54,8 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		actionBar = getActionBar();
+		actionBar.hide();
 		setContentView(R.layout.logonview);
 		usernameText = (EditText)findViewById(R.id.username);
 		passwordText = (EditText)findViewById(R.id.password);
@@ -63,8 +65,6 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		resetButton = (Button)findViewById(R.id.resetbutton);
 		logonButton.setOnClickListener(this);
 		resetButton.setOnClickListener(this);
-		actionBar = getActionBar();
-		actionBar.hide();
 		
 	}
 	

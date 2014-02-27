@@ -171,7 +171,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				super.onPreExecute();
 				mProgressDialog = new ProgressDialog(getActivity());
 				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Retrieving Phone contacts");
+				mProgressDialog.setTitle("Retrieving contacts from your Phone");
 				mProgressDialog.setMessage("Just a second.");
 				mProgressDialog.setCancelable(false);
 				mProgressDialog.setIndeterminate(true);
@@ -276,7 +276,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				super.onPreExecute();
 				mProgressDialog = new ProgressDialog(getActivity());
 				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Sending contacts to embry.io");
+				mProgressDialog.setTitle("Sending your contacts to embry.io");
 				mProgressDialog.setMessage("Won't take long.");
 				mProgressDialog.setCancelable(false);
 				mProgressDialog.setIndeterminate(true);
@@ -384,7 +384,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		super.onPreExecute();
 		progressDialog = new ProgressDialog(getActivity());
 		progressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-		progressDialog.setTitle("Creating contacts content to send");
+		progressDialog.setTitle("Preparing contacts data to send to embry.io");
 		progressDialog.setMax(inputArrayList.size());
 		progressDialog.setCancelable(false);
 		progressDialog.setIndeterminate(false);

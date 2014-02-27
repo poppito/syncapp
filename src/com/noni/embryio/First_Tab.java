@@ -124,7 +124,7 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 				super.onPreExecute();
 				mProgressDialog = new ProgressDialog(getActivity());
 				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Retrieving synced contacts from Embry.io");
+				mProgressDialog.setTitle("Retrieving synced contacts from embry.io");
 				mProgressDialog.setMessage("Just a second..");
 				mProgressDialog.setCancelable(false);
 				mProgressDialog.setIndeterminate(true);
@@ -138,7 +138,6 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 				Header[] responseHeaders = null;
 				HttpParams httpParams = new BasicHttpParams();
 				HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
-				HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLSEC);
 				HttpGet request = new HttpGet(url[0]);
 				MyHttpClient Client = LogonClass.Client;
 				Client.putContext(context);
@@ -277,7 +276,7 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 			super.onPreExecute();
 			mProgressDialog = new ProgressDialog(getActivity());
 			mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-			mProgressDialog.setTitle("Retrieving details from Embry.io");
+			mProgressDialog.setTitle("Retrieving your contacts from embry.io");
 			mProgressDialog.setMessage("Just a second..");
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.setIndeterminate(true);
@@ -376,7 +375,7 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 			progressDialog.setProgress(ProgressDialog.STYLE_HORIZONTAL);
 			progressDialog.setIndeterminate(false);
 			progressDialog.setMax(values.length());
-			progressDialog.setTitle("inserting unsynced contact(s)");
+			progressDialog.setTitle("inserting unsynced contact(s) into your phone from embry.io");
 			progressDialog.setCancelable(false);
 			progressDialog.show();
 		}

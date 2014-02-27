@@ -16,6 +16,7 @@
 
 	    <EditText
 	        android:id="@+id/registerusername"
+	        android:singleLine="True"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:hint="@string/username" />
@@ -29,6 +30,7 @@
 
 	        <EditText
 	            android:id="@+id/registerpassword"
+	            android:singleLine="True"
 	            android:inputType="textPassword"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"

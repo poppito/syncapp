@@ -52,7 +52,8 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 	private ArrayList<String> removePhoneContacts = new ArrayList<String>();
 	public HttpMethodTask1 HTM1;
 	public HttpMethodTask2 HTM2;
-	public ProgressDialog mProgressDialog;
+	public ProgressDialog mProgressDialog1;
+	public ProgressDialog mProgressDialog2;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -137,13 +138,13 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			protected void onPreExecute()
 			{
 				super.onPreExecute();
-				mProgressDialog = new ProgressDialog(getActivity());
-				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Processing...");
-				mProgressDialog.setMessage("Please wait.");
-				mProgressDialog.setCancelable(false);
-				mProgressDialog.setIndeterminate(true);
-				mProgressDialog.show();
+				mProgressDialog1 = new ProgressDialog(getActivity());
+				mProgressDialog1.setProgress(ProgressDialog.STYLE_SPINNER);
+				mProgressDialog1.setTitle("Processing...");
+				mProgressDialog1.setMessage("Please wait.");
+				mProgressDialog1.setCancelable(false);
+				mProgressDialog1.setIndeterminate(true);
+				mProgressDialog1.show();
 			}
 			
 			@Override
@@ -176,9 +177,9 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			@Override
 			protected void onPostExecute(String s)
 			{
-				if (mProgressDialog != null)
+				if (mProgressDialog1 != null)
 				{
-					mProgressDialog.dismiss();
+					mProgressDialog1.dismiss();
 				}
 				listViewContents.clear();
 				try {
@@ -242,7 +243,6 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			}
 				JSONArray jsonArray = createJsonString(removePhoneContacts);
 				Log.v(TAG, "json array is " + jsonArray.toString());
-				removePhoneContacts.clear();
 				JSONObject sendObject = getObject(jsonArray);
 				Log.v(TAG, "send object is " + sendObject.toString());
 				//new HttpMethodTask2(getActivity(), sendObject).execute(testURL2);
@@ -257,7 +257,7 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 		}
 		
 		
-		public class HttpMethodTask2 extends AsyncTask<String, Void, String> {
+		public class HttpMethodTask2 extends AsyncTask<String, String, String> {
 
 		private Context context = getActivity().getApplicationContext();
 		private JSONObject jsonObject;
@@ -273,13 +273,13 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 		protected void onPreExecute()
 		{
 			super.onPreExecute();
-			mProgressDialog = new ProgressDialog(getActivity());
-			mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-			mProgressDialog.setTitle("Deleting contacts");
-			mProgressDialog.setMessage("Please wait.");
-			mProgressDialog.setCancelable(false);
-			mProgressDialog.setIndeterminate(true);
-			mProgressDialog.show();
+			mProgressDialog2 = new ProgressDialog(getActivity());
+			mProgressDialog2.setProgress(ProgressDialog.STYLE_SPINNER);
+			mProgressDialog2.setTitle("Deleting contacts on embry.io");
+			mProgressDialog2.setMessage("Please wait.");
+			mProgressDialog2.setCancelable(false);
+			mProgressDialog2.setIndeterminate(true);
+			mProgressDialog2.show();
 		}
 
 
@@ -287,14 +287,13 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 		protected String doInBackground(String... url)  {
 			// TODO Auto-generated method stub
 			String resp = "";
-			String username = "";
-			
 			HttpParams httpParams = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
 			HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLSEC);
 			MyHttpClient Client = LogonClass.Client;
 			Client.putContext(context);
 			HttpPost request = new HttpPost(url[0]);
+			
 			try 
 			{	
 				request.setEntity(new ByteArrayEntity(jsonObject.toString().getBytes("UTF-8")));
@@ -317,12 +316,16 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			return resp;
 		}
 		
+		
 		@Override
 		protected void onPostExecute(String s)
 		{
-			if (mProgressDialog != null)
+			if (s.equals("Deleted"))
 			{
-				mProgressDialog.dismiss();
+				if (mProgressDialog2 != null)
+				{
+					mProgressDialog2.dismiss();
+				}
 			}
 			update();
 		}
@@ -334,13 +337,9 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			listViewContents.clear();
 			removePhoneContacts.clear();
 			Context context = getActivity();
-			if (HTM1.getStatus() == AsyncTask.Status.RUNNING)
+			if ((HTM1 != null) && (HTM1.getStatus() == AsyncTask.Status.FINISHED))
 			{
-				
-			}
-			else
-			{
-				HTM1 = new HttpMethodTask1(context);
+				HTM1 = new HttpMethodTask1(getActivity().getApplicationContext());
 				HTM1.execute(testURL1);
 			}
 

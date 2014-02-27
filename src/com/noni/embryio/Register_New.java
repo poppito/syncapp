@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -48,11 +49,14 @@ public class Register_New extends Activity implements OnClickListener {
 	public final String TAG = "RegisterNew";
 	public HttpMethodTask HMT;
 	private ProgressDialog mProgressDialog;
+	private ActionBar actionBar;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		actionBar = getActionBar();
+		actionBar.hide();
 		setContentView(R.layout.registernew);
 		registerUsernameText = (EditText)findViewById(R.id.registerusername);
 		registerPasswordText = (EditText)findViewById(R.id.registerpassword);
@@ -95,22 +99,15 @@ public class Register_New extends Activity implements OnClickListener {
 		String password = registerPasswordText.getText().toString();
 		String email = registerEmailText.getText().toString();
 		mEditor.putString("username", registerUsernameText.getText().toString());
-		//Log.v(TAG, registerUsernameText.getText().toString());
+		Log.v(TAG, registerUsernameText.getText().toString());
 		mEditor.putString("password", registerPasswordText.getText().toString());
-		//Log.v(TAG, registerPasswordText.getText().toString());
-		if ((username != null)&&(password.length() < 6)&&(email != null))
+		Log.v(TAG, registerPasswordText.getText().toString());
+		if ((username != null)&&(password != null)&&(email != null))
 		{
 			mEditor.apply();
-			if ((HMT != null) &&(HMT.getStatus() == AsyncTask.Status.FINISHED))
-				{
-					HMT = new HttpMethodTask(getApplicationContext());
-					HMT.execute(testURL);
-				}
-			else if (HMT == null)
-			{
-				HMT = new HttpMethodTask(getApplicationContext());
-				HMT.execute(testURL);
-			} 
+			HMT = new HttpMethodTask(getApplicationContext());
+			HMT.execute(testURL);
+				
 		}
 	}
 	
@@ -142,9 +139,9 @@ public class Register_New extends Activity implements OnClickListener {
 			//first get u/p prefs, store and test;
 			String fleh = null;
 			//create a http post request
+			Log.v(TAG, "HTTP Method task called!");
 			HttpParams httpParams = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
-			HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLSEC);
 			MyHttpClient Client = new MyHttpClient(context);
 			HttpPost request = new HttpPost(url[0]);
 			Log.v(TAG, "URL is " + url[0]);
