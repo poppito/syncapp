@@ -58,12 +58,6 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		Context context = getActivity().getApplicationContext();
-		HTM1 = new HttpMethodTask1(context);
-		if ((HTM1 != null) && (HTM1.getStatus() != AsyncTask.Status.RUNNING))
-		{
-			HTM1.execute(testURL1);
-		}
 	}
 	
 	public JSONArray createJsonString(ArrayList<String> listofdetails)
@@ -90,7 +84,7 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 				}
 				
 			}
-	Log.v(TAG, "this is the JSON array" + innerArray.toString());
+	Log.e(TAG, "this is the JSON array" + innerArray.toString());
 	return innerArray;
 	}
 	
@@ -112,6 +106,13 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		            Bundle savedInstanceState) {
 		 
+				Context context = getActivity().getApplicationContext();
+				HTM1 = new HttpMethodTask1(context);
+				if ((HTM1.getStatus() != AsyncTask.Status.RUNNING))
+				{
+					HTM1.execute(testURL1);
+					Log.e(TAG, "HTM1 called from on create view");
+				}
 		        View rootView = inflater.inflate(R.layout.third_tab, container, false);
 		        unsyncStatusList = (ListView)rootView.findViewById(R.id.embryiocontacts);
 		        selectall = (Button) rootView.findViewById(R.id.eselectall);
@@ -167,25 +168,26 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 					}
 				catch (Exception e)
 					{
-					//Log.v(TAG, "HTTP request didn't work!");
+					//Log.e(TAG, "HTTP request didn't work!");
 					resp = "none is righteous";
 					}
-				Log.v(TAG, "fleh returned "+ resp);
+				Log.e(TAG, "fleh returned "+ resp);
 				return resp;
 			} 
 			
 			@Override
 			protected void onPostExecute(String s)
 			{
-				if (mProgressDialog1 != null)
+				if (mProgressDialog1.isShowing())
 				{
+					Log.e(TAG, "did this get reached? fucking cancel progress dialogs please!");
 					mProgressDialog1.dismiss();
 				}
 				listViewContents.clear();
 				try {
 					JSONTokener tokener = new JSONTokener(s);
 					values = (JSONArray) tokener.nextValue();
-					Log.v(TAG, "json array is " + values.toString());
+					Log.e(TAG, "json array is " + values.toString());
 					for (int i=0; i<values.length(); i++)
 					{
 						JSONObject obj = values.getJSONObject(i);
@@ -232,7 +234,7 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 					boolean value  = checked.get(key);
 					if (value)
 					{
-						//Log.v(TAG, "adding " + (String)unsyncStatusList.getItemAtPosition(key));
+						
 						removePhoneContacts.add((String) unsyncStatusList.getItemAtPosition(key));
 					}
 					else
@@ -242,13 +244,13 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 					
 			}
 				JSONArray jsonArray = createJsonString(removePhoneContacts);
-				Log.v(TAG, "json array is " + jsonArray.toString());
+				Log.e(TAG, "json array is " + jsonArray.toString());
 				JSONObject sendObject = getObject(jsonArray);
-				Log.v(TAG, "send object is " + sendObject.toString());
-				//new HttpMethodTask2(getActivity(), sendObject).execute(testURL2);
+				Log.e(TAG, "send object is " + sendObject.toString());
 				HTM2 = new HttpMethodTask2(getActivity(), sendObject);
-				if ((HTM2 != null) && (HTM2.getStatus() != AsyncTask.Status.RUNNING))
+				if ((HTM2.getStatus() != AsyncTask.Status.RUNNING))
 				{
+					Log.e(TAG, "HTM2 called from onclick of the button");
 					HTM2.execute(testURL2);
 				}
 				break;
@@ -312,7 +314,7 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 				e.printStackTrace();
 			}
 			
-			Log.v(TAG, "response is " + resp.toString());
+			Log.e(TAG, "response is " + resp.toString());
 			return resp;
 		}
 		
@@ -320,13 +322,10 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 		@Override
 		protected void onPostExecute(String s)
 		{
-			if (s.equals("Deleted"))
-			{
 				if (mProgressDialog2 != null)
 				{
 					mProgressDialog2.dismiss();
 				}
-			}
 			update();
 		}
 		
@@ -340,55 +339,8 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 			if ((HTM1 != null) && (HTM1.getStatus() == AsyncTask.Status.FINISHED))
 			{
 				HTM1 = new HttpMethodTask1(getActivity().getApplicationContext());
+				Log.e(TAG, "HTM1 called from update");
 				HTM1.execute(testURL1);
-			}
-
-		}
-		
-	
-		
-		@Override
-		public void onPause()
-		{
-			super.onPause();
-			if ((HTM1 != null) && (HTM1.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM1.cancel(true);
-			}
-			if ((HTM2 != null) && (HTM2.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM2.cancel(true);
-			}
-		}
-		
-		@Override
-		public void onDestroy()
-		{
-			Log.v(TAG, "On destroy called");
-			super.onDestroy();
-			if ((HTM1 != null) && (HTM1.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM1.cancel(true);
-			}
-			if ((HTM2 != null) && (HTM2.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM2.cancel(true);
-			}
-		
-		}
-		
-		@Override
-		public void onDestroyView()
-		{
-			Log.v(TAG, "On Destroy view called");
-			super.onDestroyView();
-			if ((HTM1 != null) && (HTM1.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM1.cancel(true);
-			}
-			if ((HTM2 != null) && (HTM2.getStatus() != AsyncTask.Status.FINISHED))
-			{
-				HTM2.cancel(true);
 			}
 		}
 }

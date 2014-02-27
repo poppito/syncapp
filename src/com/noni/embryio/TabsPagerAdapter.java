@@ -20,7 +20,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	public void onlyUpdatedSelected(int position)
 	{
 		Fragment frag = getItem(position);
-		Log.v(TAG, "fragment selected is " + frag.toString());
+		Log.e(TAG, "fragment selected is " + frag.toString());
 		if (frag instanceof UpdateableFragment)
 		{
 			((UpdateableFragment) frag).update();

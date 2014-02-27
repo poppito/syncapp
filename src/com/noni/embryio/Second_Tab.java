@@ -67,23 +67,21 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 	private HttpMethodTask HMT;
 	private HttpMethodTask2 HMT2;
 	private ArrayAdapter mArrayAdapter;
-	private Handler mHandler = new Handler();
-	private static ProgressDialog mProgressDialog;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
-		if ((HMT2 != null)&&(HMT2.getStatus() != AsyncTask.Status.RUNNING))
-		{
-			HMT2.execute(testURL2);
-		}
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		            Bundle savedInstanceState) 
 	{
 		View rootView = inflater.inflate(R.layout.activity_get_contacts, container, false);
+		HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
+		if (HMT2.getStatus() != AsyncTask.Status.RUNNING)
+		{
+			HMT2.execute(testURL2);
+		}
 		listContacts = (ListView)rootView.findViewById(R.id.listcontacts);
 		Button selectall = (Button)rootView.findViewById(R.id.selectall);
 		Button deselectall = (Button)rootView.findViewById(R.id.deselectall);
@@ -99,12 +97,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 	public void update() {
 		// TODO Auto-generated method stub
 		allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver());
-		if ((HMT2 != null)&&(HMT2.getStatus() != AsyncTask.Status.RUNNING))
-		{
-			HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
-			HMT2.execute(testURL2);
-		}
-		else if (HMT2 == null)
+		if ((HMT2 != null) && (HMT2.getStatus() == AsyncTask.Status.FINISHED))
 		{
 			HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
 			HMT2.execute(testURL2);
@@ -159,7 +152,8 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		public class HttpMethodTask2 extends AsyncTask<String, Void, String> {
 
 			private int totalContactCount = 0, unmatchedContactCount = 0;
-			private Context context = getActivity().getApplicationContext();
+			private ProgressDialog mProgressDialog1;
+			private Context context;
 			public HttpMethodTask2(Context context_) {
 				// TODO Auto-generated constructor stub
 				context = context_;
@@ -169,13 +163,13 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			protected void onPreExecute()
 			{
 				super.onPreExecute();
-				mProgressDialog = new ProgressDialog(getActivity());
-				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Retrieving contacts from your Phone");
-				mProgressDialog.setMessage("Just a second.");
-				mProgressDialog.setCancelable(false);
-				mProgressDialog.setIndeterminate(true);
-				mProgressDialog.show();
+				mProgressDialog1 = new ProgressDialog(getActivity());
+				mProgressDialog1.setProgress(ProgressDialog.STYLE_SPINNER);
+				mProgressDialog1.setTitle("Retrieving contacts from your Phone");
+				mProgressDialog1.setMessage("Just a second.");
+				mProgressDialog1.setCancelable(false);
+				mProgressDialog1.setIndeterminate(true);
+				mProgressDialog1.show();
 			}
 			
 			@Override
@@ -195,7 +189,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				Header[] responseHeaders = null;
 				HttpParams httpParams = new BasicHttpParams();
 				HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
-				HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLSEC);
 				HttpGet request = new HttpGet(url[0]);
 				MyHttpClient Client = LogonClass.Client;
 				Client.putContext(context);
@@ -212,16 +205,16 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 					resp = "none is righteous";
 					}
 				
-				Log.v(TAG, "response is " + resp);
+				Log.e(TAG, "response is " + resp);
 				return resp;
 			}
 			
 			@Override
 			public void onPostExecute(String s)
 			{
-				if (mProgressDialog != null)
+				if (mProgressDialog1 != null)
 				{
-					mProgressDialog.dismiss();
+					mProgressDialog1.dismiss();
 				}
 				try
 				{
@@ -229,13 +222,17 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 					JSONTokener tokener = new JSONTokener(s);
 					values = (JSONArray) tokener.nextValue();
 				
+					Log.e(TAG, "synced contacts count is " + values.length());
+					
 					for (int i=0; i<values.length(); i++)
 					{
 						JSONObject obj = new JSONObject();
 						obj = values.getJSONObject(i);
+		
 						if (obj.getString("contact_name") != null)
 						{
 							syncedContacts.add(obj.getString("contact_name"));
+							
 						}
 					}
 				}
@@ -249,9 +246,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				}
 				
 				allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver());
-				Log.v(TAG, + allPhoneContacts.size() + " all contacts " );
+				Log.e(TAG, + allPhoneContacts.size() + " all contacts " );
 				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts);
-				Log.v(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
+				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
 				listContacts.setAdapter(mArrayAdapter);
 				listContacts.setChoiceMode(listContacts.CHOICE_MODE_MULTIPLE);
@@ -263,6 +260,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			private Context context;
 			private JSONObject jsonObject = new JSONObject();
 			ArrayList<String> selectedItemList;
+			private ProgressDialog mProgressDialog2;
 			
 			public HttpMethodTask(Context context, ArrayList<String> selectedItemList) {
 				// TODO Auto-generated constructor stub
@@ -274,13 +272,13 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			protected void onPreExecute()
 			{
 				super.onPreExecute();
-				mProgressDialog = new ProgressDialog(getActivity());
-				mProgressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
-				mProgressDialog.setTitle("Sending your contacts to embry.io");
-				mProgressDialog.setMessage("Won't take long.");
-				mProgressDialog.setCancelable(false);
-				mProgressDialog.setIndeterminate(true);
-				mProgressDialog.show();
+				mProgressDialog2 = new ProgressDialog(getActivity());
+				mProgressDialog2.setProgress(ProgressDialog.STYLE_SPINNER);
+				mProgressDialog2.setTitle("Sending your contacts to embry.io");
+				mProgressDialog2.setMessage("Won't take long.");
+				mProgressDialog2.setCancelable(false);
+				mProgressDialog2.setIndeterminate(true);
+				mProgressDialog2.show();
 			}
 			
 			@Override
@@ -334,7 +332,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				
 					resp = "none is righteous";
 					}
-				Log.v(TAG, "response is " + resp);
+				Log.e(TAG, "response is " + resp);
 				return resp;
 			}
 			
@@ -342,9 +340,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			protected void onPostExecute(String s)
 			{
 
-				if (mProgressDialog != null)
+				if (mProgressDialog2 != null)
 				{
-					mProgressDialog.dismiss();
+					mProgressDialog2.dismiss();
 				}
 				String status ="", message = "";
 				try {
@@ -410,7 +408,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 			if (deleted != 1)
 			{
-				Log.v(TAG, "name is " + name);
+				Log.e(TAG, "name is " + name);
 			
 			
 				if ( (C.getString(C.getColumnIndex(RawContacts.ACCOUNT_NAME)) != null) 
@@ -584,7 +582,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 	
 	protected void onProgressUpdate(String ... progress)
 	{
-		Log.v(TAG, "progress is being called? " + progress[0]);
+		Log.e(TAG, "progress is being called? " + progress[0]);
 		super.onProgressUpdate(progress);
 		progressDialog.setMessage(progress[0]);
 	}
@@ -598,57 +596,11 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		}
 		
 		HMT = new HttpMethodTask(getActivity().getApplicationContext(), selectedItemList);
-		if ((HMT != null)&&(HMT.getStatus() != AsyncTask.Status.RUNNING))
+		if (HMT.getStatus() != AsyncTask.Status.RUNNING)
 		{
 			HMT.execute(testURL);
 		}
 		
 	}
 }
-	
-	@Override
-	public void onPause()
-	{
-		super.onPause();
-		if ((CCC != null) && (CCC.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			CCC.cancel(true);
-		}
-		if ((HMT != null) && (HMT.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			HMT.cancel(true);
-		}
-	}
-	
-	@Override
-	public void onDestroy()
-	{
-		Log.v(TAG, "On destroy called");
-		super.onDestroy();
-		if ((CCC != null) && (CCC.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			CCC.cancel(true);
-		}
-		if ((HMT != null) && (HMT.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			HMT.cancel(true);
-		}
-		
-	}
-	
-	@Override
-	public void onDestroyView()
-	{
-		Log.v(TAG, "On Destroy view called");
-		super.onDestroyView();
-		if ((CCC != null) && (CCC.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			CCC.cancel(true);
-		}
-		if ((HMT != null) && (HMT.getStatus() != AsyncTask.Status.FINISHED))
-		{
-			HMT.cancel(true);
-		}
-	}
-
 }

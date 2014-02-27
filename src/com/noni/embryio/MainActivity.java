@@ -45,8 +45,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
         
         for (int tab_name: Tabs)
         {
-        	Tab t = actionBar.newTab();
-        	actionBar.addTab(t.setIcon(tab_name).setTabListener(this));
+        	actionBar.addTab(actionBar.newTab().setIcon(tab_name).setTabListener(this));
         }
         viewPager.setOnPageChangeListener(this);
         
@@ -97,8 +96,9 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 				names.add(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
 
 			}
-			Log.v(TAG, "deleted is " + deleted + " for contact " + C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
+			//Log.e(TAG, "deleted is " + deleted + " for contact " + C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
 		}
+		C.close();
 		return names;
 	}
 	
@@ -152,7 +152,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	@Override
 	public void onPageSelected(int position) {
 		// TODO Auto-generated method stub
-		Log.v(TAG, "hey, this is the current Fragment " + viewPager.getCurrentItem());
+		Log.e(TAG, "hey, this is the current Fragment " + viewPager.getCurrentItem());
 		mAdapter.onlyUpdatedSelected(viewPager.getCurrentItem());
 		actionBar.setSelectedNavigationItem(position);
 	}
@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	{
 		super.onResume();
 		Integer a = viewPager.getCurrentItem();
-		Log.v(TAG, "a is " + a);
+		Log.e(TAG, "a is " + a);
 		if (a != null)
 		{
 			mAdapter.onlyUpdatedSelected(a);

@@ -66,6 +66,15 @@ public class Register_New extends Activity implements OnClickListener {
 		saveButton.setOnClickListener(this);
 	}
 	
+	
+	@Override
+	public void onBackPressed()
+	{
+		Intent i = new Intent(this, LogonClass.class);
+		startActivity(i);
+		finish();
+	}
+	
 	@Override
 	protected void onDestroy()
 	{
@@ -79,29 +88,29 @@ public class Register_New extends Activity implements OnClickListener {
 	@Override
 	protected void onPause()
 	{
-		//Log.v(TAG, "on pause called");
-		//Log.v(TAG, "HMT status is " + HMT.getStatus().toString());
+		//Log.e(TAG, "on pause called");
+		//Log.e(TAG, "HMT status is " + HMT.getStatus().toString());
 		super.onPause();
 		if ((HMT != null) && (HMT.getStatus() == AsyncTask.Status.RUNNING))
 		{
 			HMT.cancel(true);
 		}
-		//Log.v(TAG, "HMT status is " + HMT.getStatus().toString());
+		//Log.e(TAG, "HMT status is " + HMT.getStatus().toString());
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Log.v(TAG, "Button press!");
+		Log.e(TAG, "Button press!");
 		SharedPreferences prefs = getSharedPreferences("preferences", MODE_PRIVATE);
 		Editor mEditor = prefs.edit();
 		String username = registerUsernameText.getText().toString();
 		String password = registerPasswordText.getText().toString();
 		String email = registerEmailText.getText().toString();
 		mEditor.putString("username", registerUsernameText.getText().toString());
-		Log.v(TAG, registerUsernameText.getText().toString());
+		Log.e(TAG, registerUsernameText.getText().toString());
 		mEditor.putString("password", registerPasswordText.getText().toString());
-		Log.v(TAG, registerPasswordText.getText().toString());
+		Log.e(TAG, registerPasswordText.getText().toString());
 		if ((username != null)&&(password != null)&&(email != null))
 		{
 			mEditor.apply();
@@ -139,12 +148,12 @@ public class Register_New extends Activity implements OnClickListener {
 			//first get u/p prefs, store and test;
 			String fleh = null;
 			//create a http post request
-			Log.v(TAG, "HTTP Method task called!");
+			Log.e(TAG, "HTTP Method task called!");
 			HttpParams httpParams = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
 			MyHttpClient Client = new MyHttpClient(context);
 			HttpPost request = new HttpPost(url[0]);
-			Log.v(TAG, "URL is " + url[0]);
+			Log.e(TAG, "URL is " + url[0]);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("username", registerUsernameText.getText().toString()));
 		    nameValuePairs.add(new BasicNameValuePair("password", registerPasswordText.getText().toString()));
@@ -158,17 +167,17 @@ public class Register_New extends Activity implements OnClickListener {
 			   request.setEntity(entity);
 			   HttpResponse response = Client.execute(request);
 			   fleh = EntityUtils.toString(response.getEntity());
-			   Log.v(TAG, "fleh returned "+ fleh);
+			   Log.e(TAG, "fleh returned "+ fleh);
 			
 			}
 			catch (ClientProtocolException e)
 				{
-				Log.v(TAG, "client protocol exception!");				
+				Log.e(TAG, "client protocol exception!");				
 				} 
 			
 			catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
-				Log.v(TAG, "encoding wasn't utf8?");
+				Log.e(TAG, "encoding wasn't utf8?");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -193,7 +202,7 @@ public class Register_New extends Activity implements OnClickListener {
 				 error = response.getString("error");
 				 registerStatus.setText(status);
 				 registerStatus.setTextColor(getResources().getColor(R.color.red));
-				 Log.v(TAG, "status " + status + " error " + error);
+				 Log.e(TAG, "status " + status + " error " + error);
 		
 				 if (error.equals("none"))
 				 {

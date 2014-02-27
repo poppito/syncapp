@@ -71,14 +71,14 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 	@Override
 	protected void onDestroy()
 	{
-		Log.v(TAG, "On Destroy called");
+		Log.e(TAG, "On Destroy called");
 		super.onDestroy();
 	}
 	
 	@Override
 	protected void onPause()
 	{
-		Log.v(TAG, "On Pause called");
+		Log.e(TAG, "On Pause called");
 		super.onPause();
 	}
 
@@ -89,7 +89,6 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		//do nothing
 	}
 
-
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
@@ -99,10 +98,10 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		{	
 			case R.id.logonbutton:
 			{
-				Log.v(TAG, "logon button pressed");
+				Log.e(TAG, "logon button pressed");
 				usernameString = usernameText.getText().toString();
 				passwordString = passwordText.getText().toString();
-				Log.v(TAG, "username is " + usernameString + "password is " + passwordString);
+				Log.e(TAG, "username is " + usernameString + "password is " + passwordString);
 				if (HMT.getStatus() != AsyncTask.Status.RUNNING)
 				{
 					try
@@ -160,7 +159,6 @@ public class HttpMethodTask extends AsyncTask<String, Void, String> {
 			Header[] responseHeaders = null;
 			HttpParams httpParams = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLSEC);
-			HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLSEC);
 			HttpPost request = new HttpPost(url[0]);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("login", "True"));
@@ -173,20 +171,20 @@ public class HttpMethodTask extends AsyncTask<String, Void, String> {
 			   Client.putContext(context);
 			   HttpResponse response = Client.execute(request);
 			   fleh = EntityUtils.toString(response.getEntity());
-			   Log.v(TAG, "fleh returned "+ fleh);
+			   Log.e(TAG, "fleh returned "+ fleh);
 			   responseHeaders = response.getAllHeaders();
 			   for (int i=0; i<responseHeaders.length; i++)
 				{
 					Header h = responseHeaders[i];
 					String name = h.getName();
 					String value = h.getValue();
-					Log.v(TAG, name + " " + value);
+					Log.e(TAG, name + " " + value);
 				}
 			
 			}
 			catch (ClientProtocolException e)
 				{
-				Log.v(TAG, "client protocol exception!");				
+				Log.e(TAG, "client protocol exception!");				
 				} 
 			catch (IOException e)
 			{
@@ -197,7 +195,7 @@ public class HttpMethodTask extends AsyncTask<String, Void, String> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Log.v(TAG, "fleh returned " + fleh);
+			Log.e(TAG, "fleh returned " + fleh);
 			return fleh;
 		}
 		
@@ -223,7 +221,7 @@ public class HttpMethodTask extends AsyncTask<String, Void, String> {
 					JSONObject response = (JSONObject) tokener.nextValue();
 					status = response.getString("status");
 					 error = response.getString("error");
-					 Log.v(TAG, "status " + status + " error " + error);
+					 Log.e(TAG, "status " + status + " error " + error);
 					 logonstatus.setText(status);
 					 logonstatus.setTextColor(getResources().getColor(R.color.red));
 					 if (error.equals("none"))
