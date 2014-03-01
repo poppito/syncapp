@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -250,6 +251,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts);
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
+				Collections.sort(displayList);
 				listContacts.setAdapter(mArrayAdapter);
 				listContacts.setChoiceMode(listContacts.CHOICE_MODE_MULTIPLE);
 		}

@@ -3,6 +3,7 @@ package com.noni.embryio;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -206,6 +207,7 @@ public class Third_Tab  extends Fragment implements OnClickListener , Updateable
 					e.printStackTrace();
 				}
 				ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String> (context, android.R.layout.simple_list_item_multiple_choice, listViewContents);
+				Collections.sort(listViewContents);
 				unsyncStatusList.setAdapter(mArrayAdapter);
 				unsyncStatusList.setChoiceMode(unsyncStatusList.CHOICE_MODE_MULTIPLE);
 			}

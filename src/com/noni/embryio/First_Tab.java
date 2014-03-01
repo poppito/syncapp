@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -182,6 +183,7 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 				totalContactCount = allPhoneContacts.size();
 			//	Log.e(TAG, "contacts on phone " + allPhoneContacts.size() + " and contacts on server are " + listViewContents.size());
 				unsyncedphoneContacts = MainActivity.getUnsyncedList(listViewContents, allPhoneContacts);
+				Collections.sort(unsyncedphoneContacts);
 				ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_multiple_choice, unsyncedphoneContacts);
 				syncStatusList.setAdapter(mArrayAdapter);
 				syncStatusList.setChoiceMode(syncStatusList.CHOICE_MODE_MULTIPLE);
