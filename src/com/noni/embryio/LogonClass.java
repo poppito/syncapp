@@ -61,7 +61,6 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		passwordText = (EditText)findViewById(R.id.password);
 		logonButton = (Button)findViewById(R.id.logonbutton);
 		logonstatus = (TextView)findViewById(R.id.logonstatus);
-		logonstatus.setText("Enter your credentials");
 		resetButton = (Button)findViewById(R.id.resetbutton);
 		logonButton.setOnClickListener(this);
 		resetButton.setOnClickListener(this);
@@ -86,7 +85,7 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 	@Override
 	public  void onBackPressed()
 	{
-		//do nothing
+		finish();
 	}
 
 	@Override
