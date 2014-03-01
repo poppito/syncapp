@@ -3,7 +3,7 @@
         android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
-    	android:background="@color/embryio"
+    	android:background="@drawable/img_bg"
     	android:orientation="vertical"
     	android:paddingLeft="@dimen/LogonPaddingLeft"
     	android:paddingRight="@dimen/LogonPaddingRight"
@@ -60,7 +60,6 @@
 	            android:id="@+id/submitbutton"
  				android:layout_width="@dimen/LogonButtonWidth"
 	            android:layout_height="@dimen/LogonButtonHeight"
-	            android:textColor="@color/embryio"
 	           	android:background="@color/bg"
 	            android:text="@string/submitbutton" />
              </TableRow>

@@ -21,13 +21,13 @@
      <string name="resetbutton">Register</string>
      <string name="emailaddress">Email</string>
      <color name="embryio">#000000</color>
-     <string name="logon">Register. Logon. Sync Away.                                 </string>
+     <string name="logon">Register. Logon. Sync.                                 </string>
      <color name="bg">#43c2cc</color>
      <color name="titletextcolour">#9f56a6</color>
      <string name="retrievephonecontacts">Woohoo! No unsynced contacts, go you!</string>
      <string name="logonstatus"></string>
-     <color name="red">#ff0000</color>
-     <string name="updatesavailable">&quot;&quot;</string>
+     <color name="white">#ffffff</color>
+     <string name="updatesavailable"></string>
      <string name="unsyncme">unsync selected items</string>
      <string name="register_status"></string>
      <string name="progressbar"/>
@@ -36,7 +36,7 @@
     <dimen name="tvSizeHalf">29dp</dimen>
     <dimen name="tvHeight">48dp</dimen>
     <dimen name="LogonPaddingTop">30dp</dimen>
-    <dimen name="LogonPaddingLeft">100dp</dimen>
+    <dimen name="LogonPaddingLeft">80dp</dimen>
     <dimen name="LogonPaddingRight">80dp</dimen>
     <dimen name="LogonTVPaddingBottom">30dp</dimen>
     <dimen name="LogonTextSize">18sp</dimen>

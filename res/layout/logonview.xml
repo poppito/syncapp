@@ -1,50 +1,41 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tableLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/embryio"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/LogonPaddingLeft"
-    android:paddingRight="@dimen/LogonPaddingRight"
-    android:paddingTop="@dimen/LogonPaddingTop"
-    tools:context=".MainActivity" >
+	    android:id="@+id/tableLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@drawable/img_bg"
+	    android:orientation="vertical"
+	    android:paddingLeft="@dimen/LogonPaddingLeft"
+	    android:paddingRight="@dimen/LogonPaddingRight"
+	    android:paddingTop="@dimen/LogonPaddingTop"
+	    tools:context=".MainActivity" >
     	
         <TableRow
-          	android:id="@+id/tableRow8"
-            android:layout_width="@dimen/LogonTextWidth"
-            android:layout_height="@dimen/LogonTextHeight">
+          	android:id="@+id/tableRow8">
     	
     	<TextView
     	    android:id="@+id/embryio"
     	    android:layout_width="@dimen/LogonTextWidth"
     	    android:layout_height="@dimen/LogonTextHeight"
     	    android:text="@string/logon"
-    	    android:textAlignment="center"
-    	    android:textColor="@color/titletextcolour"
     	    android:textSize="@dimen/LogonTextSize" >
     	</TextView>
         </TableRow>
         
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="@dimen/LogonButtonWidth"
-            android:paddingBottom="@dimen/LogonPaddingBottom"
-            android:layout_height="@dimen/LogonButtonHeight">
+            android:paddingBottom="@dimen/LogonPaddingBottom">
 	    <EditText
 	        android:id="@+id/username"
 	        android:layout_width="@dimen/LogonButtonWidth"
 	        android:layout_height="@dimen/LogonButtonHeight"
-	        android:textAlignment="center"
 	        android:singleLine="True"
 	        android:hint="@string/username" />
 	    </TableRow>
 
 	    <TableRow
 	        android:id="@+id/tablerow2"
-	        android:layout_width="@dimen/LogonButtonWidth"
 	        android:paddingBottom="@dimen/LogonPaddingBottom"
-	        android:layout_height="@dimen/LogonButtonHeight"
 	        >
 
 	        <EditText
@@ -67,9 +58,7 @@
 	            android:contentDescription="@string/logonbutton"
 	            android:layout_width="@dimen/LogonButtonWidth"
 	            android:layout_height="@dimen/LogonButtonHeight"
-	           	android:textColor="@color/titletextcolour"
 	           	android:background="@color/bg"
-	            android:textAlignment="center"
 	            android:text="@string/logonbutton" />
              </TableRow>
              <TableRow
@@ -79,12 +68,9 @@
 	        android:paddingBottom="@dimen/LogonPaddingBottom">
              <Button
 	            android:id="@+id/resetbutton"
-	            android:contentDescription="@string/resetbutton"
 	            android:layout_width="@dimen/LogonButtonWidth"
-	            android:textColor="@color/titletextcolour"
 	            android:layout_height="@dimen/LogonButtonHeight"
 	            android:background="@color/bg"
-	            android:textAlignment="center"
 	            android:text="@string/resetbutton" />
              </TableRow>
          <TableRow 
@@ -96,29 +82,10 @@
              
           <CheckBox 
               android:id="@+id/remembercheck"
-              android:textColor="@color/bg"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/rememberpref"
               />
           </TableRow>
-          
-         <TableRow
-          	android:id="@+id/tableRow9"
-          	android:layout_height="@dimen/LogonTextHeight"
-            android:layout_width="@dimen/LogonTextWidth"
-            android:paddingBottom="@dimen/LogonPaddingBottom"
-           >
-    	
-    	<TextView
-            android:id="@+id/logonstatus"
-            android:layout_width="@dimen/LogonTextWidth"
-            android:layout_height="@dimen/LogonTextHeight"
-            android:textSize="@dimen/LogonTextSize"
-           	android:textColor="@color/titletextcolour"
-           	android:textAlignment="center"
-            android:text="@string/logonstatus">
-    	</TextView>
-        </TableRow>
 
     </TableLayout>

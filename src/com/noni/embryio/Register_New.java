@@ -201,7 +201,7 @@ public class Register_New extends Activity implements OnClickListener {
 				 status = response.getString("status");
 				 error = response.getString("error");
 				 registerStatus.setText(status);
-				 registerStatus.setTextColor(getResources().getColor(R.color.red));
+				 registerStatus.setTextColor(getResources().getColor(R.color.white));
 				 Log.e(TAG, "status " + status + " error " + error);
 		
 				 if (error.equals("none"))

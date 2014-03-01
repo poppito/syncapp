@@ -60,7 +60,6 @@ public class LogonClass extends FragmentActivity implements OnClickListener {
 		usernameText = (EditText)findViewById(R.id.username);
 		passwordText = (EditText)findViewById(R.id.password);
 		logonButton = (Button)findViewById(R.id.logonbutton);
-		logonstatus = (TextView)findViewById(R.id.logonstatus);
 		resetButton = (Button)findViewById(R.id.resetbutton);
 		logonButton.setOnClickListener(this);
 		resetButton.setOnClickListener(this);
@@ -221,8 +220,7 @@ public class HttpMethodTask extends AsyncTask<String, Void, String> {
 					status = response.getString("status");
 					 error = response.getString("error");
 					 Log.e(TAG, "status " + status + " error " + error);
-					 logonstatus.setText(status);
-					 logonstatus.setTextColor(getResources().getColor(R.color.red));
+					
 					 if (error.equals("none"))
 					 {
 						Intent i = new Intent(LogonClass.this, MainActivity.class);
