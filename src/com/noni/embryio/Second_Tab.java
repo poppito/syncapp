@@ -249,6 +249,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver());
 				Log.e(TAG, + allPhoneContacts.size() + " all contacts " );
 				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts);
+				Log.e(TAG, "the synced list has " + displayList.size());
+				int duplicateCount = MainActivity.getDuplicates(syncedContacts, displayList);
+				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
 				Collections.sort(displayList);

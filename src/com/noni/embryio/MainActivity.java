@@ -58,6 +58,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
     
 	public static ArrayList<String> getUnsyncedList(ArrayList<String> retrievedContacts, ArrayList<String> phone_Contacts)
 	{
+	
 			for (int j = 0; j<phone_Contacts.size(); j++)
 			{
 				if (retrievedContacts.contains(phone_Contacts.get(j)))
@@ -81,7 +82,37 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		return syncedContacts;
 	}
 	
-
+	public static int getDuplicates(ArrayList<String> retrievedContacts, ArrayList<String> displayedList)
+	{
+		int duplicateCount = 0;
+		ArrayList<String> tempRetrievedContacts = retrievedContacts;
+		ArrayList<String> tempDisplayedList = displayedList;
+		
+		for (int a=0; a<tempRetrievedContacts.size(); a++)
+		{
+			String temp = tempRetrievedContacts.get(a);
+			temp = temp.toLowerCase();
+			Log.e(TAG, temp + " is the current retrievedContact which should be lower case");
+		}
+		
+		for (int b=0; b<tempDisplayedList.size(); b++)
+		{
+			String temp = tempDisplayedList.get(b);
+			temp = temp.toLowerCase();
+			Log.e(TAG, temp + " is the current displayedContact which should be lower case");
+		}
+		
+		for (int i = 0; i< tempDisplayedList.size(); i++)
+		{
+			if (tempRetrievedContacts.contains(displayedList.get(i)))
+			{
+				Log.e(TAG, "duplicate is " + displayedList.get(i));
+				duplicateCount++;
+			}
+		}
+		return duplicateCount;
+	}
+	
 	public static ArrayList<String> getPhoneContactNames(ContentResolver cr)
 	{
 		String[] proj = { RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.DELETED} ;
