@@ -92,6 +92,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		{
 			String temp = tempRetrievedContacts.get(a);
 			temp = temp.toLowerCase();
+			tempRetrievedContacts.set(a, temp);
 			Log.e(TAG, temp + " is the current retrievedContact which should be lower case");
 		}
 		
@@ -99,6 +100,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		{
 			String temp = tempDisplayedList.get(b);
 			temp = temp.toLowerCase();
+			tempDisplayedList.set(b, temp);
 			Log.e(TAG, temp + " is the current displayedContact which should be lower case");
 		}
 		
