@@ -37,6 +37,10 @@
                               <activity
             android:name=".Register_New"
             android:label="@string/app_name"></activity>
+                                                 <activity
+            android:name=".DuplicateMerge"
+            android:label="@string/app_name"></activity>
+            
     </application>
 
 </manifest>

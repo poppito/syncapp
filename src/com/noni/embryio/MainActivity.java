@@ -108,7 +108,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		{
 			if (tempRetrievedContacts.contains(displayedList.get(i)))
 			{
-				Log.e(TAG, "duplicate is " + displayedList.get(i));
+				//(TAG, "duplicate is " + displayedList.get(i));
 				duplicateCount++;
 			}
 		}
