@@ -2,6 +2,9 @@ package com.noni.embryio;
 import android.support.v4.app.Fragment;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -98,9 +101,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		
 	}
 	
-	private void createAlertDialog()
-	{
-	}
 	
 	@Override
 	public void onStart()
@@ -168,6 +168,42 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				}
 			}
 		}
+		
+		
+		
+	public static class MyAlertDialogFragment extends DialogFragment{
+			
+			public static MyAlertDialogFragment newInstance(int title)
+			{
+				MyAlertDialogFragment frag = new MyAlertDialogFragment();
+				Bundle args = new Bundle();
+				args.putInt("title", title);
+				frag.setArguments(args);
+				return frag;
+			}
+			
+			@Override
+			public Dialog onCreateDialog(Bundle savedInstanceState)
+			{
+				int title = getArguments().getInt("title");
+				return new AlertDialog.Builder(getActivity())
+                .setTitle(title)
+                .setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    }
+                )
+                .setNegativeButton("No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    }
+                )
+                .create();
+    }
+}
+
 		
 		
 		public class HttpMethodTask2 extends AsyncTask<String, Void, String> {
@@ -274,7 +310,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				Log.e(TAG, "duplicate count is " + duplicateCount);
 				if (duplicateCount > 0)
 				{
-					createAlertDialog();
+					MyAlertDialogFragment frag = new MyAlertDialogFragment();
 				}
 				
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
