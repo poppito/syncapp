@@ -72,7 +72,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 	private HttpMethodTask HMT;
 	private HttpMethodTask2 HMT2;
 	private ArrayAdapter mArrayAdapter;
-	private Boolean duplicatesFound;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -83,7 +82,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		            Bundle savedInstanceState) 
 	{
 		View rootView = inflater.inflate(R.layout.activity_get_contacts, container, false);
-		//duplicatesFound = false;
 	//	HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
 	//	if (HMT2.getStatus() != AsyncTask.Status.RUNNING)
 	//	{
@@ -100,12 +98,15 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		
 	}
 	
+	private void createAlertDialog()
+	{
+	}
+	
 	@Override
 	public void onStart()
 	{
 		//View rootView = inflater.inflate(R.layout.activity_get_contacts, container, false);
 		super.onStart();
-		duplicatesFound = false;
 		HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
 		if (HMT2.getStatus() != AsyncTask.Status.RUNNING)
 		{
@@ -273,31 +274,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				Log.e(TAG, "duplicate count is " + duplicateCount);
 				if (duplicateCount > 0)
 				{
-				//	duplicatesFound = true;
-					AlertDialog.Builder aBuilder = new AlertDialog.Builder(getActivity());
-					aBuilder.create();					
-					aBuilder.setTitle("Duplicates found!");
-					aBuilder.setMessage("There were duplicates found. Shall we merge them to their existing copies?");
-					aBuilder.setCancelable(true);
-					aBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int id) {
-							// TODO Auto-generated method stub
-							Intent i = new Intent(context, DuplicateMerge.class);
-							startActivity(i);
-
-						}
-					});
-					aBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int id) {
-							// TODO Auto-generated method stub
-							dialog.cancel();
-						}
-					} );
+					createAlertDialog();
 				}
+				
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
