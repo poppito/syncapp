@@ -168,43 +168,24 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				}
 			}
 		}
+
 		
-		
-		
-	public static class MyAlertDialogFragment extends DialogFragment{
+	public static class MyDialogFragment extends DialogFragment{
 			
-			public static MyAlertDialogFragment newInstance(int title)
+			public static MyDialogFragment newInstance()
 			{
-				MyAlertDialogFragment frag = new MyAlertDialogFragment();
-				Bundle args = new Bundle();
-				args.putInt("title", title);
-				frag.setArguments(args);
-				return frag;
+				return new MyDialogFragment();
 			}
 			
 			@Override
-			public Dialog onCreateDialog(Bundle savedInstanceState)
-			{
-				int title = getArguments().getInt("title");
-				return new AlertDialog.Builder(getActivity())
-                .setTitle(title)
-                .setPositiveButton("Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                        }
-                    }
-                )
-                .setNegativeButton("No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                        }
-                    }
-                )
-                .create();
-    }
-}
-
-		
+			public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				            Bundle savedInstanceState) {
+				View v = inflater.inflate(R.layout.dialogfragment, container, false);
+				View tv = v.findViewById(R.id.space1);
+				((TextView)tv).setText("This is an instance of MyDialogFragment");
+				        return v;
+				    }
+				}
 		
 		public class HttpMethodTask2 extends AsyncTask<String, Void, String> {
 
@@ -310,7 +291,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				Log.e(TAG, "duplicate count is " + duplicateCount);
 				if (duplicateCount > 0)
 				{
-					MyAlertDialogFragment frag = new MyAlertDialogFragment();
+					 DialogFragment newFragment = MyDialogFragment.newInstance();
+					 newFragment.show(getActivity().getFragmentManager(), "dialog");
+
 				}
 				
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );

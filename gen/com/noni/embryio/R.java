@@ -107,11 +107,12 @@ public final class R {
     public static final class layout {
         public static final int activity_get_contacts=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int get_sync_status=0x7f030002;
-        public static final int logonview=0x7f030003;
-        public static final int registernew=0x7f030004;
-        public static final int second_tab=0x7f030005;
-        public static final int third_tab=0x7f030006;
+        public static final int dialogfragment=0x7f030002;
+        public static final int get_sync_status=0x7f030003;
+        public static final int logonview=0x7f030004;
+        public static final int registernew=0x7f030005;
+        public static final int second_tab=0x7f030006;
+        public static final int third_tab=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
