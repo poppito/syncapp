@@ -175,8 +175,29 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 			public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				            Bundle savedInstanceState) {
 				View v = inflater.inflate(R.layout.dialogfragment, container, false);
-				View tv = v.findViewById(R.id.space1);
+				View tv = v.findViewById(R.id.duplicateDialog);
 				((TextView)tv).setText("Merge duplicates?");
+				Button yesButton, noButton;
+				yesButton = (Button)v.findViewById(R.id.yesButton);
+				noButton = (Button)v.findViewById(R.id.noButton);
+				yesButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{
+						Intent i = new Intent(getActivity(), DuplicateMerge.class);
+						startActivity(i);
+					}
+				});
+				noButton.setOnClickListener(new OnClickListener()
+				{
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						//MyDialogFragment.
+					}
+					
+				});
 				        return v;
 				    }
 				}
