@@ -5,10 +5,30 @@
     android:orientation="vertical" >
     
      <TextView
-    android:layout_width="@dimen/tvSizeHalf"
+    android:layout_width="@dimen/tvSizeFull"
+    android:gravity="center_horizontal"
     android:layout_height="@dimen/tvHeight"
-   	android:id="@+id/space1">
+    android:text="@string/dialogText"
+   	android:id="@+id/duplicateDialog">
    	</TextView>
+   	
+     <Button
+     android:layout_width="@dimen/tvSizeFull"
+     android:layout_below="@id/duplicateDialog"
+     android:layout_height="@dimen/tvHeight"
+     android:text="@string/yesButton"
+     android:id="@+id/yesButton">
+     </Button>
+     
+     <Button
+     android:layout_width="@dimen/tvSizeFull"
+     android:layout_below="@id/duplicateDialog"
+     android:layout_toRightOf="@id/yesButton"
+     android:layout_height="@dimen/tvHeight"
+     android:text="@string/noButton"
+     android:id="@+id/noButton">
+
+     </Button>
     
     
 

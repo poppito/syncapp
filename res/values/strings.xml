@@ -45,5 +45,8 @@
     <dimen name="LogonPaddingBottom">5dp</dimen>
     <dimen name="LogonTextWidth">120dp</dimen>
     <dimen name="LogonTextHeight">50dp</dimen>
+    <string name="dialogText">Mucho gracias</string>
+    <string name="yesButton">Yes</string>
+    <string name="noButton">No</string>
 
 </resources>

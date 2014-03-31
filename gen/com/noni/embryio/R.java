@@ -61,48 +61,51 @@ public final class R {
         public static final int img_bg=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0029;
+        public static final int action_settings=0x7f0b002c;
         public static final int deselectall=0x7f0b0003;
-        public static final int edeselectall=0x7f0b0026;
-        public static final int embryio=0x7f0b000f;
-        public static final int embryiocontacts=0x7f0b0028;
-        public static final int eselectall=0x7f0b0025;
+        public static final int duplicateDialog=0x7f0b0009;
+        public static final int edeselectall=0x7f0b0029;
+        public static final int embryio=0x7f0b0012;
+        public static final int embryiocontacts=0x7f0b002b;
+        public static final int eselectall=0x7f0b0028;
         public static final int listcontacts=0x7f0b0007;
-        public static final int listcontacts1=0x7f0b000c;
-        public static final int logonbutton=0x7f0b0015;
+        public static final int listcontacts1=0x7f0b000f;
+        public static final int logonbutton=0x7f0b0018;
+        public static final int noButton=0x7f0b000b;
         public static final int pager=0x7f0b0008;
-        public static final int password=0x7f0b0013;
-        public static final int register_status=0x7f0b0023;
-        public static final int registeremail=0x7f0b001f;
-        public static final int registerpassword=0x7f0b001d;
-        public static final int registertableRow1=0x7f0b001a;
-        public static final int registertablerow2=0x7f0b001c;
-        public static final int registertablerow3=0x7f0b001e;
-        public static final int registertablerow4=0x7f0b0020;
-        public static final int registertablerow6=0x7f0b0022;
-        public static final int registerusername=0x7f0b001b;
-        public static final int remembercheck=0x7f0b0019;
-        public static final int resetbutton=0x7f0b0017;
-        public static final int secondtab_tv=0x7f0b0024;
+        public static final int password=0x7f0b0016;
+        public static final int register_status=0x7f0b0026;
+        public static final int registeremail=0x7f0b0022;
+        public static final int registerpassword=0x7f0b0020;
+        public static final int registertableRow1=0x7f0b001d;
+        public static final int registertablerow2=0x7f0b001f;
+        public static final int registertablerow3=0x7f0b0021;
+        public static final int registertablerow4=0x7f0b0023;
+        public static final int registertablerow6=0x7f0b0025;
+        public static final int registerusername=0x7f0b001e;
+        public static final int remembercheck=0x7f0b001c;
+        public static final int resetbutton=0x7f0b001a;
+        public static final int secondtab_tv=0x7f0b0027;
         public static final int selectall=0x7f0b0001;
         public static final int space1=0x7f0b0000;
         public static final int space2=0x7f0b0002;
         public static final int space3=0x7f0b0004;
         public static final int space4=0x7f0b0006;
-        public static final int submitbutton=0x7f0b0021;
+        public static final int submitbutton=0x7f0b0024;
         public static final int syncme=0x7f0b0005;
-        public static final int tableLayout1=0x7f0b000d;
-        public static final int tableRow1=0x7f0b0010;
-        public static final int tableRow8=0x7f0b000e;
-        public static final int tablerow2=0x7f0b0012;
-        public static final int tablerow3=0x7f0b0014;
-        public static final int tablerow4=0x7f0b0018;
-        public static final int tablerow5=0x7f0b0016;
-        public static final int udeselectall=0x7f0b000a;
-        public static final int unsyncme=0x7f0b0027;
-        public static final int uselectall=0x7f0b0009;
-        public static final int username=0x7f0b0011;
-        public static final int usyncme=0x7f0b000b;
+        public static final int tableLayout1=0x7f0b0010;
+        public static final int tableRow1=0x7f0b0013;
+        public static final int tableRow8=0x7f0b0011;
+        public static final int tablerow2=0x7f0b0015;
+        public static final int tablerow3=0x7f0b0017;
+        public static final int tablerow4=0x7f0b001b;
+        public static final int tablerow5=0x7f0b0019;
+        public static final int udeselectall=0x7f0b000d;
+        public static final int unsyncme=0x7f0b002a;
+        public static final int uselectall=0x7f0b000c;
+        public static final int username=0x7f0b0014;
+        public static final int usyncme=0x7f0b000e;
+        public static final int yesButton=0x7f0b000a;
     }
     public static final class layout {
         public static final int activity_get_contacts=0x7f030000;
@@ -129,10 +132,12 @@ public final class R {
         public static final int contactname=0x7f070005;
         public static final int contactnumber=0x7f070006;
         public static final int deselectall=0x7f07000a;
+        public static final int dialogText=0x7f070019;
         public static final int emailaddress=0x7f070011;
         public static final int logon=0x7f070012;
         public static final int logonbutton=0x7f07000d;
         public static final int logonstatus=0x7f070014;
+        public static final int noButton=0x7f07001b;
         public static final int notathing=0x7f070002;
         public static final int password=0x7f07000c;
         public static final int progressbar=0x7f070018;
@@ -148,6 +153,7 @@ public final class R {
         public static final int unsyncme=0x7f070016;
         public static final int updatesavailable=0x7f070015;
         public static final int username=0x7f07000b;
+        public static final int yesButton=0x7f07001a;
     }
     public static final class style {
         /** 

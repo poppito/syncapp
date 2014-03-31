@@ -85,11 +85,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		            Bundle savedInstanceState) 
 	{
 		View rootView = inflater.inflate(R.layout.activity_get_contacts, container, false);
-	//	HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
-	//	if (HMT2.getStatus() != AsyncTask.Status.RUNNING)
-	//	{
-	//		HMT2.execute(testURL2);
-	//	}
 		listContacts = (ListView)rootView.findViewById(R.id.listcontacts);
 		Button selectall = (Button)rootView.findViewById(R.id.selectall);
 		Button deselectall = (Button)rootView.findViewById(R.id.deselectall);
@@ -105,7 +100,6 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 	@Override
 	public void onStart()
 	{
-		//View rootView = inflater.inflate(R.layout.activity_get_contacts, container, false);
 		super.onStart();
 		HMT2 = new HttpMethodTask2(getActivity().getApplicationContext());
 		if (HMT2.getStatus() != AsyncTask.Status.RUNNING)
@@ -182,7 +176,7 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				            Bundle savedInstanceState) {
 				View v = inflater.inflate(R.layout.dialogfragment, container, false);
 				View tv = v.findViewById(R.id.space1);
-				((TextView)tv).setText("This is an instance of MyDialogFragment");
+				((TextView)tv).setText("Merge duplicates?");
 				        return v;
 				    }
 				}
