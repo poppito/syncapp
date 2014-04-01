@@ -1,6 +1,7 @@
 package com.noni.embryio;
 import android.support.v4.app.Fragment;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -194,7 +195,10 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						//MyDialogFragment.
+						//MyDialogFragment
+						dismiss();
+				
+		
 					}
 					
 				});
@@ -307,7 +311,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				if (duplicateCount > 0)
 				{
 					 DialogFragment newFragment = MyDialogFragment.newInstance();
+					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					 newFragment.show(getActivity().getFragmentManager(), "dialog");
+					 
 
 				}
 				

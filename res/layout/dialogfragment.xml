@@ -2,14 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
     <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical">
+    android:paddingLeft="@dimen/tvSizeFull"
+    android:background="@color/bg"
+    android:paddingRight="@dimen/tvSizeFull"
+    android:layout_gravity="center">
     
      <TextView
-    android:layout_width="@dimen/tvSizeFull"
+    android:layout_width="@dimen/dialogTextSize"
+    android:textColor="@color/embryio"
     android:gravity="center_horizontal"
     android:layout_height="@dimen/tvHeight"
     android:text="@string/dialogText"
@@ -20,6 +25,7 @@
      android:layout_width="@dimen/tvSizeFull"
      android:layout_below="@id/duplicateDialog"
      android:layout_height="@dimen/tvHeight"
+     android:textColor="@color/embryio"
      android:text="@string/yesButton"
      android:id="@+id/yesButton">
      </Button>
@@ -29,6 +35,7 @@
      android:layout_below="@id/duplicateDialog"
      android:layout_toRightOf="@id/yesButton"
      android:layout_height="@dimen/tvHeight"
+     android:textColor="@color/embryio"
      android:text="@string/noButton"
      android:id="@+id/noButton">
 
