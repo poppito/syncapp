@@ -310,18 +310,17 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				Log.e(TAG, "duplicate count is " + duplicateCount);
 				if (duplicateCount > 0)
 				{
+					{
+						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
+						t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
+					}
 					 DialogFragment newFragment = MyDialogFragment.newInstance();
 					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					 newFragment.show(getActivity().getFragmentManager(), "dialog");
-					 
-
 				}
-				
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
-				Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
-				t.show(); //This shouldn't show everytime :(
 				Collections.sort(displayList);
 				listContacts.setAdapter(mArrayAdapter);
 				listContacts.setChoiceMode(listContacts.CHOICE_MODE_MULTIPLE);

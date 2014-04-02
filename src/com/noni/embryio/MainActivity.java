@@ -23,8 +23,8 @@ import android.view.Menu;
 @SuppressLint("NewApi")
 public class MainActivity extends FragmentActivity implements TabListener, OnPageChangeListener {
 	
-	   private ViewPager viewPager;
-	   private TabsPagerAdapter mAdapter;
+	   private static ViewPager viewPager;
+	   private static TabsPagerAdapter mAdapter;
 	   public static final String mPassedString = "passedString";
 	   private int[] Tabs = { R.drawable.ic_actionbar_tab_download, R.drawable.ic_actionbar_tab_upload, R.drawable.ic_actionbar_tab_delete };
 	   public ActionBar actionBar;
@@ -85,8 +85,8 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	public static int getDuplicates(ArrayList<String> retrievedContacts, ArrayList<String> displayedList)
 	{
 		int duplicateCount = 0;
-		ArrayList<String> tempRetrievedContacts = retrievedContacts;
-		ArrayList<String> tempDisplayedList = displayedList;
+		ArrayList<String >tempRetrievedContacts = new ArrayList<String>(retrievedContacts);
+		ArrayList<String> tempDisplayedList = new ArrayList<String> (displayedList);
 		
 		for (int a=0; a<tempRetrievedContacts.size(); a++)
 		{
@@ -106,7 +106,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		
 		for (int i = 0; i< tempDisplayedList.size(); i++)
 		{
-			if (tempRetrievedContacts.contains(displayedList.get(i)))
+			if (tempRetrievedContacts.contains(tempDisplayedList.get(i)))
 			{
 				//(TAG, "duplicate is " + displayedList.get(i));
 				duplicateCount++;
@@ -187,6 +187,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		// TODO Auto-generated method stub
 		Log.e(TAG, "hey, this is the current Fragment " + viewPager.getCurrentItem());
 		mAdapter.onlyUpdatedSelected(viewPager.getCurrentItem());
+		//Log.e(TAG, "ViewPager has " + viewPager.getCurrentItem());
 		actionBar.setSelectedNavigationItem(position);
 	}
 	
