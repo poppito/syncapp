@@ -93,6 +93,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		selectall.setOnClickListener(this);
 		deselectall.setOnClickListener(this);
 		syncme.setOnClickListener(this);
+		selectall.setEnabled(false);
+		deselectall.setEnabled(false);
+		syncme.setEnabled(false);
 		return rootView;
 		
 	}
