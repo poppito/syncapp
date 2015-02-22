@@ -19,7 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.noni.embryio.First_Tab.HttpMethodTask;
+import com.noni.embryio.FirstTab.HttpMethodTask;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -36,7 +36,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-public class Third_Tab  extends Fragment implements OnClickListener , UpdateableFragment {
+public class ThirdTab  extends Fragment implements OnClickListener , UpdateableFragment {
 
 	public ListView embryioContacts;
 	public Button selectall, deselectall, unsync;

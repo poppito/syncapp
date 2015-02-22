@@ -43,7 +43,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class First_Tab extends Fragment implements OnClickListener, UpdateableFragment {
+public class FirstTab extends Fragment implements OnClickListener, UpdateableFragment {
 	
 	private ListView syncStatusList;
 	private Button retrieveContacts, updatesAvailable;
@@ -71,11 +71,6 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 			HMT = new HttpMethodTask(getActivity().getApplicationContext());
 			HMT.execute(testURL1);
 		}
-	}
-	
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
 	}
 	
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,

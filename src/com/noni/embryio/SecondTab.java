@@ -60,7 +60,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Second_Tab extends Fragment implements OnClickListener, UpdateableFragment {
+public class SecondTab extends Fragment implements OnClickListener, UpdateableFragment {
 	
 	private static String TAG = "Second_Tab";
 	private Button selectall, deselectall, syncme;

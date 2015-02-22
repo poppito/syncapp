@@ -8,9 +8,9 @@ import android.util.Log;
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 	public FragmentManager fm;
 	public final String TAG = "TabsPagerAdapter";
-	public Fragment FT = new First_Tab();
-	public Fragment ST = new Second_Tab();
-	public Fragment TT = new Third_Tab();
+	public Fragment FT = new FirstTab();
+	public Fragment ST = new SecondTab();
+	public Fragment TT = new ThirdTab();
 	
 	
 	public TabsPagerAdapter(FragmentManager fm){
