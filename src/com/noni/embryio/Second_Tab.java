@@ -62,7 +62,7 @@ import android.widget.Toast;
 
 public class Second_Tab extends Fragment implements OnClickListener, UpdateableFragment {
 	
-	private static String TAG = "GetContactsDataNew";
+	private static String TAG = "Second_Tab";
 	private Button selectall, deselectall, syncme;
 	private ListView listContacts;
 	private ArrayList<String> selectedItemList = new ArrayList<String>();
@@ -93,9 +93,9 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 		selectall.setOnClickListener(this);
 		deselectall.setOnClickListener(this);
 		syncme.setOnClickListener(this);
-		selectall.setEnabled(false);
-		deselectall.setEnabled(false);
-		syncme.setEnabled(false);
+		//selectall.setEnabled(false);
+		//deselectall.setEnabled(false);
+		//syncme.setEnabled(false);
 		return rootView;
 		
 	}
@@ -314,12 +314,12 @@ public class Second_Tab extends Fragment implements OnClickListener, UpdateableF
 				if (duplicateCount > 0)
 				{
 					{
-						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
-						t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
+						//Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
+						//t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
 					}
-					 DialogFragment newFragment = MyDialogFragment.newInstance();
-					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-					 newFragment.show(getActivity().getFragmentManager(), "dialog");
+				//	 DialogFragment newFragment = MyDialogFragment.newInstance();
+				//	 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+				//	 newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");

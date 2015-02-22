@@ -47,7 +47,7 @@ public class First_Tab extends Fragment implements OnClickListener, UpdateableFr
 	
 	private ListView syncStatusList;
 	private Button retrieveContacts, updatesAvailable;
-	private static final String TAG = "GetSyncStatus";
+	private static final String TAG = "First_Tab";
 	private static String testURL1 = Constants.SERVERURL + "getsyncedcontacts";
 	private static String testURL2 = Constants.SERVERURL + "getsyncstatus";
 	private int TIMEOUT_MILLSEC = 10000;
