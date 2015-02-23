@@ -505,7 +505,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 				if (inputArrayList.contains(name))
 				{
 					
-					prog = "processing contact " + countingContacts + " of "  + inputArrayList.size();
+					prog = "processing contact " + (countingContacts - 1) + " of "  + (inputArrayList.size());
 					publishProgress(prog);
 					countingContacts++;
 					String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));

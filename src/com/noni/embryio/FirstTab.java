@@ -374,7 +374,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 			try 
 			{
 				int j = values.length();
-				for (int i=0; i<values.length(); i++)
+				for (int i=0; i<(values.length()-1); i++)
 				{
 					publishProgress("Inserting " + i + " of " + j + " contacts");
 					int deleted = 0;

@@ -143,8 +143,9 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
     }
 
 
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		//get fragment first
 		//viewPager.setCurrentItem(tab.getPosition());
