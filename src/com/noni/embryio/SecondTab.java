@@ -314,12 +314,12 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 				if (duplicateCount > 0)
 				{
 					{
-						//Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
-						//t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
+						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
+						t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
 					}
-				//	 DialogFragment newFragment = MyDialogFragment.newInstance();
-				//	 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-				//	 newFragment.show(getActivity().getFragmentManager(), "dialog");
+					 DialogFragment newFragment = MyDialogFragment.newInstance();
+					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+					 newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
