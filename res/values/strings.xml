@@ -22,7 +22,7 @@
      <string name="emailaddress">Email</string>
      <color name="embryio">#00AAEF</color>
      <string name="logon">Register. Logon. Sync.                                 </string>
-     <color name="bg">#2CC2DD</color>
+     <color name="bg">#003399</color>
      <color name="titletextcolour">#9f56a6</color>
      <string name="retrievephonecontacts">Woohoo! No unsynced contacts, go you!</string>
      <string name="logonstatus"></string>
