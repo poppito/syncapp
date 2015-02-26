@@ -42,7 +42,7 @@ public class ThirdTab  extends Fragment implements OnClickListener , UpdateableF
 	public Button selectall, deselectall, unsync;
 	public ListView unsyncStatusList;
 	public Button retrieveContacts, updatesAvailable;
-	public static final String TAG = "Third_Tab";
+	public static final String TAG = "ThirdTab";
 	public static String testURL1 = Constants.SERVERURL + "getsyncedcontacts";
 	public static String testURL2 = Constants.SERVERURL + "unsynccontacts";
 	public int TIMEOUT_MILLSEC = 10000;

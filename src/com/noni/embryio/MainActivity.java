@@ -22,7 +22,6 @@ import android.view.Menu;
 
 @SuppressLint("NewApi")
 public class MainActivity extends FragmentActivity implements TabListener, OnPageChangeListener {
-	
 	   private static ViewPager viewPager;
 	   private static TabsPagerAdapter mAdapter;
 	   public static final String mPassedString = "passedString";
