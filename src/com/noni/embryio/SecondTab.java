@@ -1,20 +1,20 @@
 package com.noni.embryio;
 import android.support.v4.app.Fragment;
 
-import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
+//import android.app.ActionBar;
+//import android.app.AlertDialog;
+//import android.app.AlertDialog.Builder;
+//import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
+//import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+//import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.Data;
@@ -38,7 +38,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
+//import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
@@ -62,7 +62,7 @@ import android.widget.Toast;
 
 public class SecondTab extends Fragment implements OnClickListener, UpdateableFragment {
 	
-	private static String TAG = "Second_Tab";
+	private static String TAG = "SecondTab";
 	private Button selectall, deselectall, syncme;
 	private ListView listContacts;
 	private ArrayList<String> selectedItemList = new ArrayList<String>();
@@ -200,8 +200,6 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 						// TODO Auto-generated method stub
 						//MyDialogFragment
 						dismiss();
-				
-		
 					}
 					
 				});
@@ -317,7 +315,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
 						t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
 					}
-					 DialogFragment newFragment = MyDialogFragment.newInstance();
+					DialogFragment newFragment = MyDialogFragment.newInstance();
 					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					 newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
