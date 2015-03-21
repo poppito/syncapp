@@ -46,12 +46,10 @@ import android.widget.Toast;
 public class FirstTab extends Fragment implements OnClickListener, UpdateableFragment {
 	
 	private ListView syncStatusList;
-	private Button retrieveContacts, updatesAvailable;
 	private static final String TAG = "First_Tab";
 	private static String testURL1 = Constants.SERVERURL + "getsyncedcontacts";
 	private static String testURL2 = Constants.SERVERURL + "getsyncstatus";
 	private int TIMEOUT_MILLSEC = 10000;
-	private  ArrayAdapter<String> mArrayAdapter = null;
 	private ArrayList<String> listViewContents = new ArrayList<String>();
 	private JSONArray values = new JSONArray();
 	private ArrayList<String> allPhoneContacts, unsyncedphoneContacts;

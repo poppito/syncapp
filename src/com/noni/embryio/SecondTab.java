@@ -168,11 +168,11 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 		}
 
 		
-	public static class MyDialogFragment extends DialogFragment{
+	public static class duplicateDialogFragment extends DialogFragment{
 			
-			public static MyDialogFragment newInstance()
+			public static duplicateDialogFragment newInstance()
 			{
-				return new MyDialogFragment();
+				return new duplicateDialogFragment();
 			}
 			
 			@Override
@@ -313,9 +313,9 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 				{
 					{
 						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
-						t.show(); //This shouldn't show everytime :( could validate by checking which tab is open? ;D
+						t.show();
 					}
-					DialogFragment newFragment = MyDialogFragment.newInstance();
+					duplicateDialogFragment newFragment = duplicateDialogFragment.newInstance();
 					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					 newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
