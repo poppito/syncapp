@@ -167,45 +167,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 			}
 		}
 
-		
-	public static class duplicateDialogFragment extends DialogFragment{
 			
-			public static duplicateDialogFragment newInstance()
-			{
-				return new duplicateDialogFragment();
-			}
-			
-			@Override
-			public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				            Bundle savedInstanceState) {
-				View v = inflater.inflate(R.layout.dialogfragment, container, false);
-				View tv = v.findViewById(R.id.duplicateDialog);
-				((TextView)tv).setText("Merge duplicates?");
-				Button yesButton, noButton;
-				yesButton = (Button)v.findViewById(R.id.yesButton);
-				noButton = (Button)v.findViewById(R.id.noButton);
-				yesButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{
-						Intent i = new Intent(getActivity(), DuplicateMerge.class);
-						startActivity(i);
-					}
-				});
-				noButton.setOnClickListener(new OnClickListener()
-				{
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						//MyDialogFragment
-						dismiss();
-					}
-					
-				});
-				        return v;
-				    }
-				}
 		
 		public class HttpMethodTask2 extends AsyncTask<String, Void, String> {
 
@@ -315,9 +277,11 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 						Toast t = Toast.makeText(context, "There are " + duplicateCount + " duplicate contacts", Toast.LENGTH_SHORT);
 						t.show();
 					}
-					duplicateDialogFragment newFragment = duplicateDialogFragment.newInstance();
-					 newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-					 newFragment.show(getActivity().getFragmentManager(), "dialog");
+					DuplicateDialogFragment newFragment = new DuplicateDialogFragment().DuplicateDialogFragment();
+					newFragment.getDuplicates(displayList);
+					newFragment.getSyncedContacts(syncedContacts);
+					newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+					newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
 				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
 				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
