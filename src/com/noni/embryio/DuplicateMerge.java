@@ -24,7 +24,7 @@ public class DuplicateMerge extends FragmentActivity {
 	  
 		  super.onCreate(savedInstanceState);
 		  setContentView(R.layout.duplicate_merge);
-		  mergeContacts = (ListView)findViewById(R.id.mergecontacts);
+		  mergeContacts = (ListView)findViewById(R.id.mergeContacts);
 		  Intent intent = getIntent();
 		  mergeDuplicates = intent.getStringArrayListExtra("duplicateContacts");
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");

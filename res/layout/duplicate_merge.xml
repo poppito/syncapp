@@ -1,15 +1,24 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/edit_name"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:layout_gravity="center" android:orientation="vertical"  >
-    
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
     <ListView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
     	android:background="@color/embryio"
-        android:id="@+id/mergecontacts"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true">  
+        android:id="@+id/mergeContacts">
     </ListView>
-      
-</LinearLayout>
+    <Button
+        android:id="@+id/backButton"
+        android:layout_below="@id/mergeContacts"
+        android:layout_width="100dp"
+        android:layout_height="60dp">
+    </Button>
+    <Button
+        android:id="@+id/mergeButton"
+        android:layout_below="@id/mergeContacts"
+        android:layout_toRightOf="@id/backButton"
+        android:layout_width="100dp"
+        android:layout_height="60dp">
+    </Button>
+</RelativeLayout>
