@@ -201,6 +201,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 					}
 				break;
 			case R.id.usyncme:
+				Log.v(TAG, "sync me button pressed!");
 				ArrayList <String> selectedItemList = new ArrayList<String>();
 				SparseBooleanArray checked = syncStatusList.getCheckedItemPositions();
 				for (int i = 0; i < checked.size(); i++){
@@ -209,7 +210,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 					boolean value  = checked.get(key);
 					if (value)
 				    {
-				    	//Log.e(TAG, "adding " + (String)syncStatusList.getItemAtPosition(key));
+				    	Log.v(TAG, "adding " + (String)syncStatusList.getItemAtPosition(key));
 				    	selectedItemList.add((String) syncStatusList.getItemAtPosition(key));
 				    }
 				}
@@ -219,15 +220,15 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 			    	for (int j=0; j<selectedItemList.size(); j++)
 			    	{
 			    		
-			    		//Log.e(TAG, "selected name is " + selectedItemList.get(j));
+			    		Log.v(TAG, "selected name is " + selectedItemList.get(j));
 			    		JSONObject contactName = new JSONObject();
 						contactName.put("contactName", selectedItemList.get(j));
 						sendArray.put(contactName);
 			    	}
-			    	//Log.e(TAG, "send array is " + sendArray.toString());
+			    	Log.v(TAG, "send array is " + sendArray.toString());
 			    	JSONObject sendObj = new JSONObject();
 			    	sendObj.put("contacts", sendArray.toString());
-			    	sendObj.put("username", "haha");
+			   // 	sendObj.put("username", "haha");
 			    	sendArray = null;
 			    	HMT2 = new HttpMethodTask2(getActivity().getApplicationContext(), sendObj);
 			    	if ((HMT2 != null) && (HMT2.getStatus() != AsyncTask.Status.RUNNING))
@@ -298,7 +299,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 				e.printStackTrace();
 			}
 			
-			Log.e(TAG, "response is " + resp.toString());
+			Log.v(TAG, "response is " + resp.toString());
 			return resp;
 		}
 		
@@ -312,10 +313,11 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 			{
 				JSONTokener tokener = new JSONTokener(s);
 				JSONArray detailsValues = (JSONArray) tokener.nextValue();
-				Log.e(TAG, "There are " + detailsValues.length() + " unsynced contacts");
-				context = getActivity().getApplicationContext();
-				ContentResolver cr = getActivity().getContentResolver();
-				IUC = new InsertUnsyncedContacts(context, cr, detailsValues);
+				Log.v(TAG, "There are " + detailsValues.length() + " unsynced contacts");
+				Log.v(TAG, "detail values is " + detailsValues.toString());
+				Context context_ = getActivity().getApplicationContext();
+				ContentResolver cr_ = getActivity().getContentResolver();
+				IUC = new InsertUnsyncedContacts(context_, cr_, detailsValues);
 				if ((IUC != null) && (IUC.getStatus() != AsyncTask.Status.RUNNING))
 				{
 					IUC.execute();
@@ -325,10 +327,12 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 			catch (JSONException e)
 			{
 				e.printStackTrace();
+				Log.v(TAG, "json exception");
 			}
 			catch (ClassCastException e)
 			{
 				e.printStackTrace();
+				Log.v(TAG, "class cast exception");
 			}
 			
 		}
@@ -347,6 +351,8 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 				
 		public InsertUnsyncedContacts (Context context, ContentResolver cr, JSONArray values)
 		{
+			
+			Log.v(TAG, "constructor for IUC reached");
 			this.context = context;
 			this.cr = cr;
 			this.values = values;
@@ -372,15 +378,15 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 			try 
 			{
 				int j = values.length();
-				for (int i=0; i<(values.length()-1); i++)
+				Log.v(TAG, "values length is " + values.length());
+				for (int i=0; i<(values.length()); i++)
 				{
-					publishProgress("Inserting " + i + " of " + j + " contacts");
+					
+					//publishProgress("Inserting " + i + " of " + j + " contacts");
 					int deleted = 0;
 					JSONObject obj = new JSONObject();
 					obj = values.getJSONObject(i);
 					
-	
-						
 						if (obj.getString("contact_name") != null)
 						
 						{
@@ -391,9 +397,12 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 								
 								ContentProviderOperation.Builder op;
 
-								Log.e(TAG, "names list check passed");
+								Log.v(TAG, "names list check passed");
 								if (( obj.getString("accountName") != null) && (obj.getString("accountType") != null))
 								{
+									accountName = obj.getString("accountName");
+									accountType = obj.getString("accountType");
+									Log.v(TAG, "account name is " + accountName.toString() + " account type is " + accountType.toString());
 									
 									op = ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
 									.withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, accountName)
@@ -452,7 +461,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 										String key = (String)iter.next();
 										String value = IMs.getString(key);
 										
-								//		Log.e(TAG, "IM type " + key + " Protocol " + value);
+										Log.v(TAG, "IM type " + key + " Protocol " + value);
 										
 										{
 											op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
@@ -481,7 +490,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 										
 										{
 											
-											//Log.e(TAG, "Note is " + key);
+											Log.v(TAG, "Note is " + key);
 											op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
 											.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
 											.withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
@@ -507,7 +516,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 										
 										{
 											
-											//Log.e(TAG, "Address " + key + " address type " + value);
+											Log.v(TAG, "Address " + key + " address type " + value);
 											
 											op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
 											.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -534,7 +543,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 										
 										
 										{
-											//Log.e(TAG, "website is " + key);
+											Log.v(TAG, "website is " + key);
 											
 											op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
 											.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -556,7 +565,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 											String key = (String)iter.next();
 											String value = Org.getString(key);
 											
-											//Log.e(TAG, "Org is " + key + " Title  " + value);
+											Log.v(TAG, "Org is " + key + " Title  " + value);
 											{
 												
 												op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
@@ -593,14 +602,15 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 										if (Ops != null)			
 										{
 											ContentProviderResult[] result  = cr.applyBatch(ContactsContract.AUTHORITY, Ops);
-											Log.e(TAG, "Content provider result is " + result[0]);
+											Log.v(TAG, "Content provider result is " + result[0]);
 										}
 									}
 											
 								catch (Exception e )
 									{
+										Log.v(TAG, "contact add didn't work! ");
 										e.printStackTrace();
-										//Log.e(TAG, "contact add didn't work! ");
+										
 									}			
 						}
 					}
@@ -610,12 +620,14 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 					catch (JSONException e) 
 					{
 						// TODO Auto-generated catch block
+						Log.v(TAG, "json exception before insert");
 						e.printStackTrace();
 					}
 								
-					catch (NullPointerException e)
+					//catch (NullPointerException e)
 					{
-						e.printStackTrace();
+					//	Log.v(TAG, "null pointer exception before insert");
+					//	e.printStackTrace();
 					}
 				return null;
 				}
@@ -623,7 +635,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 		
 		protected void onProgressUpdate(String... progress) 
 		{   
-			Log.e(TAG, "progress is at " + progress[0]);
+			Log.v(TAG, "progress is at " + progress[0]);
 			super.onProgressUpdate(progress[0]);
 			progressDialog.setMessage(progress[0]);
 			
