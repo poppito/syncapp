@@ -382,7 +382,7 @@ public class FirstTab extends Fragment implements OnClickListener, UpdateableFra
 				for (int i=0; i<(values.length()); i++)
 				{
 					
-					//publishProgress("Inserting " + i + " of " + j + " contacts");
+					publishProgress("Inserting " + i + " of " + j + " contacts");
 					int deleted = 0;
 					JSONObject obj = new JSONObject();
 					obj = values.getJSONObject(i);
