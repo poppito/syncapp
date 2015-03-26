@@ -42,6 +42,7 @@ public class DuplicateMerge extends FragmentActivity {
 	  
 	  public void findAllDuplicates(ContentResolver cr, ArrayList<String> duplicateContacts)
 	  {
+		  Log.v(TAG, "duplicate method reached");
 		  ArrayList<String> mergeDuplicates;
 		  this.cr = cr;
 		  this.mergeDuplicates = duplicateContacts;
@@ -55,7 +56,7 @@ public class DuplicateMerge extends FragmentActivity {
 				int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 				if (deleted != 1)
 				{
-					Log.v(TAG, "name is " + name);
+					
 				
 				
 					if ( (C.getString(C.getColumnIndex(RawContacts.ACCOUNT_NAME)) != null) 
