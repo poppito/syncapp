@@ -43,32 +43,27 @@ public class DuplicateMerge extends FragmentActivity {
 	  public void findAllDuplicates(ContentResolver cr, ArrayList<String> duplicateContacts)
 	  {
 		  Log.v(TAG, "duplicate method reached");
-		  ArrayList<String> mergeDuplicates;
 		  this.cr = cr;
-		  this.mergeDuplicates = duplicateContacts;
-		  String name, accountName = null; String accountType = null;
+		  String accountName = null; 
+		  String dupName = "";
+		  String accountType = null;
 		  String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.ACCOUNT_NAME, RawContacts.ACCOUNT_TYPE, RawContacts.DELETED};
 		  Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
 
-			while (C.moveToNext())
+			
+		  for (int x=0; x < duplicateContacts.size(); x++)
+		  {
+			  dupName = duplicateContacts.get(x);
+			  Log.v(TAG, "duplicate contact is " + duplicateContacts.get(x));
+		  	
+			 while (C.moveToNext())
 			{
-				name = C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY));
-				int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
-				if (deleted != 1)
-				{
-					
-				
-				
-					if ( (C.getString(C.getColumnIndex(RawContacts.ACCOUNT_NAME)) != null) 
-							&& (C.getString(C.getColumnIndex(RawContacts.ACCOUNT_TYPE)) != null) )
-					{
-							accountName = C.getString(C.getColumnIndex(RawContacts.ACCOUNT_NAME));
-							accountType = C.getString(C.getColumnIndex(RawContacts.ACCOUNT_TYPE));
-							
-							Log.v(TAG, "account name is " + accountName.toString() + " account type " + accountType.toString());
-					}
-				}
+				if (dupName.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
+						{
+							Log.v(TAG, "Found duplicate contact name " +  C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
+						}
 			}
+		  }
+				
 	  }
-	
 }
