@@ -51,6 +51,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.noni.embryio.R.string;
+
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View.OnClickListener;
@@ -150,8 +152,12 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					boolean value  = checked.get(key);
 					if (value)
 				    {
-				    	
-				    	selectedItemList.add((String) listContacts.getItemAtPosition(key));
+						if (selectedItemList.contains(listContacts.getItemAtPosition(key)))
+						{
+							Log.v(TAG, listContacts.getItemAtPosition(key).toString() + " is a duplicate!!!!");
+							
+						}	
+						selectedItemList.add((String) listContacts.getItemAtPosition(key));
 				    }
 					else
 				    {
@@ -242,7 +248,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					JSONTokener tokener = new JSONTokener(s);
 					values = (JSONArray) tokener.nextValue();
 				
-					Log.e(TAG, "synced contacts count is " + values.length());
+					Log.v(TAG, "synced contacts count is " + values.length());
 					
 					for (int i=0; i<values.length(); i++)
 					{
@@ -266,11 +272,12 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 				}
 				
 				allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver());
-				Log.e(TAG, + allPhoneContacts.size() + " all contacts " );
+				Log.v(TAG, allPhoneContacts.size() + " all contacts " );
+				Log.v(TAG, syncedContacts.size() + " synced contacts");
 				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts);
-				Log.e(TAG, "the synced list has " + displayList.size());
+				Log.v(TAG, "the synced list has " + displayList.size());
 				int duplicateCount = MainActivity.getDuplicates(syncedContacts, displayList);
-				Log.e(TAG, "duplicate count is " + duplicateCount);
+				Log.v(TAG, "duplicate count is " + duplicateCount);
 				if (duplicateCount > 0)
 				{
 					{

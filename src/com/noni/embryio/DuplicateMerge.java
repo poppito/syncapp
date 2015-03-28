@@ -33,7 +33,7 @@ public class DuplicateMerge extends FragmentActivity {
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, mergeDuplicates);
 		  mergeContacts.setAdapter(mergeArrayAdapter);
 		  mergeContacts.setChoiceMode(mergeContacts.CHOICE_MODE_MULTIPLE);
-		  Log.v(TAG, mergeDuplicates.toString() + " " + mergeSyncedContacts.toString());
+		  Log.v(TAG, "These are duplicates" + mergeDuplicates.toString() + " " + "These are synced contacts " + mergeSyncedContacts.toString());
 		  cr = getContentResolver();
 		  findAllDuplicates(cr, mergeDuplicates);
 	  }
