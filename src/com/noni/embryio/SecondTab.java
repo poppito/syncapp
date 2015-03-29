@@ -290,8 +290,8 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
-				Log.e(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
-				Log.e(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
+				Log.v(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
+				Log.v(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
 				Collections.sort(displayList);
 				listContacts.setAdapter(mArrayAdapter);

@@ -86,14 +86,14 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		int duplicateCount = 0;
 		ArrayList<String >tempRetrievedContacts = new ArrayList<String>(retrievedContacts);
 		ArrayList<String> tempDisplayedList = new ArrayList<String> (displayedList);
-		String dupContact;
+		
 		
 		for (int a=0; a<tempRetrievedContacts.size(); a++)
 		{
 			String temp = tempRetrievedContacts.get(a);
 			temp = temp.toLowerCase();
 			tempRetrievedContacts.set(a, temp);
-			//Log.e(TAG, temp + " is the current retrievedContact which should be lower case");
+			//Log.v(TAG, temp + " is the current retrievedContact which should be lower case");
 		}
 		
 		for (int b=0; b<tempDisplayedList.size(); b++)
@@ -101,16 +101,17 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 			String temp = tempDisplayedList.get(b);
 			temp = temp.toLowerCase();
 			tempDisplayedList.set(b, temp);
-		//	Log.e(TAG, temp + " is the current displayedContact which should be lower case");
+		//	Log.v(TAG, temp + " is the current displayedContact which should be lower case");
 		}
 		
 		for (int i = 0; i< tempDisplayedList.size(); i++)
 		{
+			String dupContact;
 			dupContact = tempDisplayedList.get(i);
 			if (tempRetrievedContacts.contains(dupContact))
 			{
 				//Log.e(TAG, "duplicate is " + displayedList.get(i));
-				Log.e(TAG, "duplicate is " + dupContact);
+				Log.v(TAG, "comparing " + dupContact + " to "+  tempRetrievedContacts.toString());
 				duplicateCount++;
 			}
 		}
