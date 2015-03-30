@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.provider.ContactsContract.RawContacts;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
-public class DuplicateMerge extends FragmentActivity {
+public class DuplicateMerge extends FragmentActivity implements OnClickListener {
 	
 	private ListView mergeContacts;
 	private ArrayList<String> mergeDuplicates, mergeSyncedContacts;
@@ -20,6 +23,7 @@ public class DuplicateMerge extends FragmentActivity {
 	public String TAG = "DuplicateMerge";
 	private ContentResolver cr;
 	private ArrayAdapter mergeArrayAdapter;
+	public Button mergeButton, backButton;
 	
 	  @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,10 @@ public class DuplicateMerge extends FragmentActivity {
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, mergeDuplicates);
 		  mergeContacts.setAdapter(mergeArrayAdapter);
 		  mergeContacts.setChoiceMode(mergeContacts.CHOICE_MODE_MULTIPLE);
+		  mergeButton = (Button)findViewById(R.id.mergeButton);
+		  backButton = (Button) findViewById(R.id.backButton);
+		  backButton.setOnClickListener(this);
+		  mergeButton.setOnClickListener(this);
 		  Log.v(TAG, "These are duplicates" + mergeDuplicates.toString() + " " + "These are synced contacts " + mergeSyncedContacts.toString());
 		  cr = getContentResolver();
 		  findAllDuplicates(cr, mergeDuplicates);
@@ -66,4 +74,24 @@ public class DuplicateMerge extends FragmentActivity {
 		  }
 				
 	  }
+
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+		switch (v.getId())
+		{
+			case (R.id.backButton):
+			{
+				break;
+			}
+			
+			case (R.id.mergeButton):
+			{
+				break;
+			}
+		}
+	}
 }

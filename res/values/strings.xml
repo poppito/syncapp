@@ -49,5 +49,7 @@
     <string name="yesButton">Yes</string>
     <string name="noButton">No</string>
     <dimen name="dialogTextSize">120dp</dimen>
+    <string name="merge_button">Merge</string>
+    <string name="merge_back">Back</string>
 
 </resources>

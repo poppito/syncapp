@@ -142,6 +142,8 @@ public final class R {
         public static final int logon=0x7f070012;
         public static final int logonbutton=0x7f07000d;
         public static final int logonstatus=0x7f070014;
+        public static final int merge_back=0x7f07001d;
+        public static final int merge_button=0x7f07001c;
         public static final int noButton=0x7f07001b;
         public static final int notathing=0x7f070002;
         public static final int password=0x7f07000c;

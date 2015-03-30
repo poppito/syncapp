@@ -9,6 +9,7 @@
         android:id="@+id/mergeContacts">
     </ListView>
     <Button
+        android:text="@string/merge_back"
         android:id="@+id/backButton"
         android:layout_below="@id/mergeContacts"
         android:layout_width="100dp"
@@ -16,6 +17,7 @@
     </Button>
     <Button
         android:id="@+id/mergeButton"
+        android:text="@string/merge_button"
         android:layout_below="@id/mergeContacts"
         android:layout_toRightOf="@id/backButton"
         android:layout_width="100dp"
