@@ -147,7 +147,6 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 				SparseBooleanArray checked = listContacts.getCheckedItemPositions();
 				for (int i = 0; i < checked.size(); i++)
 				{
-			    
 					int key = checked.keyAt(i);
 					boolean value  = checked.get(key);
 					if (value)
@@ -231,7 +230,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					resp = "none is righteous";
 					}
 				
-				Log.e(TAG, "response is " + resp);
+				Log.v(TAG, "response is " + resp);
 				return resp;
 			}
 			
@@ -271,13 +270,12 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					e.printStackTrace();
 				}
 				
-				allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver());
+				allPhoneContacts = MainActivity.getPhoneContactNames(getActivity().getContentResolver()); //gets all contacts except ones marked for deletion
 				Log.v(TAG, allPhoneContacts.size() + " all contacts " );
 				Log.v(TAG, syncedContacts.size() + " synced contacts");
-				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts);
-				Log.v(TAG, "the synced list has " + displayList.size());
+				displayList = MainActivity.getSyncedList(syncedContacts, allPhoneContacts); //compares synced contacts with unsynced ones to only show unsynced contacts
 				int duplicateCount = MainActivity.getDuplicates(syncedContacts, displayList);
-				Log.v(TAG, "duplicate count is " + duplicateCount);
+				Log.v(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				if (duplicateCount > 0)
 				{
 					{
@@ -290,8 +288,6 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 					newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 					newFragment.show(getActivity().getFragmentManager(), "dialog");
 				}
-				Log.v(TAG, "there are " + duplicateCount + " duplicates! But there are " + syncedContacts.size() + " synced contacts" );
-				Log.v(TAG, "there are " + syncedContacts.size() + " synced contacts " + displayList.size() + " unsynced contacts");
 				mArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, displayList);
 				Collections.sort(displayList);
 				listContacts.setAdapter(mArrayAdapter);

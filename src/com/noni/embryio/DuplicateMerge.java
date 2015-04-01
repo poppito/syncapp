@@ -1,6 +1,9 @@
 package com.noni.embryio;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -41,36 +44,29 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  backButton = (Button) findViewById(R.id.backButton);
 		  backButton.setOnClickListener(this);
 		  mergeButton.setOnClickListener(this);
-		  Log.v(TAG, "These are duplicates" + mergeDuplicates.toString() + " " + "These are synced contacts " + mergeSyncedContacts.toString());
 		  cr = getContentResolver();
-		  findAllDuplicates(cr, mergeDuplicates);
+		  findAllDuplicates(mergeDuplicates);
 	  }
 	  
 	  
 	  
-	  public void findAllDuplicates(ContentResolver cr, ArrayList<String> duplicateContacts)
+	  public void findAllDuplicates(ArrayList<String> duplicateContacts)
 	  {
 		  Log.v(TAG, "duplicate method reached");
-		  this.cr = cr;
-		  String accountName = null; 
+		  Map<String, Integer> dupContacts = new HashMap<String,Integer>();
+		  ArrayList<String> tempDupHolder = new ArrayList<String>(duplicateContacts);
+		  int countDuplicates = 0;
 		  String dupName = "";
 		  String accountType = null;
-		  String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.ACCOUNT_NAME, RawContacts.ACCOUNT_TYPE, RawContacts.DELETED};
-		  Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
+		//  String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.ACCOUNT_NAME, RawContacts.ACCOUNT_TYPE, RawContacts.DELETED};
+		//  Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
 
-			
-		  for (int x=0; x < duplicateContacts.size(); x++)
+		  for (int x=0; x < tempDupHolder.size(); x++)
 		  {
-			  dupName = duplicateContacts.get(x);
-			  Log.v(TAG, "duplicate contact is " + duplicateContacts.get(x));
-		  	
-			 while (C.moveToNext())
-			{
-				if (dupName.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
-						{
-							Log.v(TAG, "Found duplicate contact name " +  C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
-						}
-			}
+			dupName = tempDupHolder.get(x);
+			countDuplicates = Collections.frequency(tempDupHolder, dupName);
+			tempDupHolder.removeAll(Collections.singleton(dupName));
+			Log.v(TAG, dupName + " occurs " + countDuplicates);
 		  }
 				
 	  }

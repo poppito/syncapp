@@ -1,5 +1,8 @@
 package com.noni.embryio;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
@@ -129,10 +132,12 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 			int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 			if (deleted != 1)
 			{
-				names.add(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
+				String currentContact = "";
+				currentContact = C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY));
+				names.add(currentContact);
 
 			}
-			//Log.e(TAG, "deleted is " + deleted + " for contact " + C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY)));
+			//Log.v(TAG, "deleted is " + deleted + " for contact " + C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY));
 		}
 		C.close();
 		return names;
