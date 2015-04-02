@@ -3,6 +3,7 @@ package com.noni.embryio;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import android.content.ContentResolver;
@@ -21,7 +22,7 @@ import android.widget.ListView;
 public class DuplicateMerge extends FragmentActivity implements OnClickListener {
 	
 	private ListView mergeContacts;
-	private ArrayList<String> mergeDuplicates, mergeSyncedContacts;
+	private ArrayList<String> mergeDuplicates, mergeSyncedContacts, displayList;
 	private int duplicateCount;
 	public String TAG = "DuplicateMerge";
 	private ContentResolver cr;
@@ -37,7 +38,9 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  Intent intent = getIntent();
 		  mergeDuplicates = intent.getStringArrayListExtra("duplicateContacts");
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
-		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, mergeDuplicates);
+		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
+		  displayList = getDisplayList(displayMap);
+		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
 		  mergeContacts.setAdapter(mergeArrayAdapter);
 		  mergeContacts.setChoiceMode(mergeContacts.CHOICE_MODE_MULTIPLE);
 		  mergeButton = (Button)findViewById(R.id.mergeButton);
@@ -45,33 +48,45 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  backButton.setOnClickListener(this);
 		  mergeButton.setOnClickListener(this);
 		  cr = getContentResolver();
-		  findAllDuplicates(mergeDuplicates);
 	  }
 	  
 	  
 	  
-	  public void findAllDuplicates(ArrayList<String> duplicateContacts)
+	  public Map<String, Integer> findAllDuplicates(ArrayList<String> duplicateContacts)
 	  {
 		  Log.v(TAG, "duplicate method reached");
 		  Map<String, Integer> dupContacts = new HashMap<String,Integer>();
 		  ArrayList<String> tempDupHolder = new ArrayList<String>(duplicateContacts);
 		  int countDuplicates = 0;
 		  String dupName = "";
-		  String accountType = null;
-		//  String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.ACCOUNT_NAME, RawContacts.ACCOUNT_TYPE, RawContacts.DELETED};
-		//  Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
-
 		  for (int x=0; x < tempDupHolder.size(); x++)
 		  {
 			dupName = tempDupHolder.get(x);
 			countDuplicates = Collections.frequency(tempDupHolder, dupName);
 			tempDupHolder.removeAll(Collections.singleton(dupName));
-			Log.v(TAG, dupName + " occurs " + countDuplicates);
+			Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
+			dupContacts.put(dupName, countDuplicates);
 		  }
-				
+		return dupContacts;
 	  }
-
-
+	  
+	  
+	  public ArrayList<String> getDisplayList(Map <String, Integer> dispMap)
+	  {
+		  ArrayList<String> dispList = new ArrayList<String>();
+		  
+		  Iterator dispMapIterator = dispMap.keySet().iterator();
+		  while(dispMapIterator.hasNext())
+		  {
+			    String key=(String)dispMapIterator.next();
+			    String value = String.valueOf(dispMap.get(key));
+			    dispList.add(key + " (" + value + " instances)"); 
+		  }
+		  
+		  Log.v(TAG, dispList.toString() + " contents of display list");
+		  
+		  return dispList;
+	  }
 
 	@Override
 	public void onClick(View v) {
@@ -81,6 +96,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		{
 			case (R.id.backButton):
 			{
+				finish();
 				break;
 			}
 			
