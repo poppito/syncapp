@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.RawContacts;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -38,6 +41,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  Intent intent = getIntent();
 		  mergeDuplicates = intent.getStringArrayListExtra("duplicateContacts");
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
+		  findContactInfo(mergeDuplicates);
 		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
 		  displayList = getDisplayList(displayMap);
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
@@ -54,7 +58,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	  
 	  public Map<String, Integer> findAllDuplicates(ArrayList<String> duplicateContacts)
 	  {
-		  Log.v(TAG, "duplicate method reached");
+		  //Log.v(TAG, "duplicate method reached");
 		  Map<String, Integer> dupContacts = new HashMap<String,Integer>();
 		  ArrayList<String> tempDupHolder = new ArrayList<String>(duplicateContacts);
 		  int countDuplicates = 0;
@@ -64,12 +68,11 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			dupName = tempDupHolder.get(x);
 			countDuplicates = Collections.frequency(tempDupHolder, dupName);
 			tempDupHolder.removeAll(Collections.singleton(dupName));
-			Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
+			// Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
 			dupContacts.put(dupName, countDuplicates);
 		  }
 		return dupContacts;
 	  }
-	  
 	  
 	  public ArrayList<String> getDisplayList(Map <String, Integer> dispMap)
 	  {
@@ -83,7 +86,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			    dispList.add(key + " (" + value + " instances)"); 
 		  }
 		  
-		  Log.v(TAG, dispList.toString() + " contents of display list");
+		 // Log.v(TAG, dispList.toString() + " contents of display list");
 		  
 		  return dispList;
 	  }
@@ -104,6 +107,42 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			{
 				break;
 			}
+		}
+	}
+	
+	
+	
+	
+	public void findContactInfo(ArrayList<String> mergeDup)
+	{
+		Log.v(TAG, "merge dup contents are " + mergeDup.toString());
+		ContentResolver cr = getContentResolver();
+		String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.DELETED};
+		String name;
+		
+		for (int x=0; x<mergeDup.size(); x++)
+		{
+			Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
+			name = mergeDup.get(x);
+			while (C.moveToNext())
+			{
+				
+				if (name.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
+				{
+					int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
+					if (deleted != 1)
+					{
+						Log.v(TAG, "found contact! " + name);
+						
+						String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
+						String[] filter = {contactID};
+						
+						Cursor phoneCursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  
+								null, Phone.CONTACT_ID + "=?", filter, null);
+					}
+				}
+			}
+			C.close();
 		}
 	}
 }

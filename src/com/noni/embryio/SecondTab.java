@@ -492,7 +492,6 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 						}
 					}
 					detailType.put("phoneNumbers", numObj.toString());
-		  
 			        Cursor emailCursor = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, Phone.CONTACT_ID + "=?", filter, null);
 			       
 			        while(emailCursor.moveToNext())
