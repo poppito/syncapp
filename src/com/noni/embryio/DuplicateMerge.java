@@ -68,7 +68,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			dupName = tempDupHolder.get(x);
 			countDuplicates = Collections.frequency(tempDupHolder, dupName);
 			tempDupHolder.removeAll(Collections.singleton(dupName));
-			// Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
+			//Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
 			dupContacts.put(dupName, countDuplicates);
 		  }
 		return dupContacts;
