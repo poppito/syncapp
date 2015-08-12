@@ -129,6 +129,9 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 				
 				if (name.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
 				{
+					
+					String ContactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
+					Log.v(TAG, "for name " + name + " contact ID is " + ContactID);
 					int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 					if (deleted != 1)
 					{
