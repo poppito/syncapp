@@ -83,7 +83,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  {
 			    String key=(String)dispMapIterator.next();
 			    String value = String.valueOf(dispMap.get(key));
-			    dispList.add(key + " (" + value + " instances)"); 
+			    dispList.add(key + " (" + value + " duplicates))"); 
 		  }
 		  
 		 // Log.v(TAG, dispList.toString() + " contents of display list");
