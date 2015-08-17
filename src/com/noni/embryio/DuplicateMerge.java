@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -170,6 +171,67 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 					            	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
 					            }
 					        }
+						 
+						 
+					        Cursor addressCursor = cr.query(ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,  
+									null, CommonDataKinds.StructuredPostal.CONTACT_ID + "=?", filter, null);
+					        
+					        while(addressCursor.moveToNext())
+					        {
+					        	String type = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.TYPE));
+					            String address = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS));
+					          
+					            if ((address != null) && (type != null))
+					            {
+					            	
+					            	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + address +  " and the email address type is " + type);
+					            	
+					            }
+					        }
+					        
+					        
+					        Cursor genericCursor = cr.query(Data.CONTENT_URI,  
+									null, Data.CONTACT_ID + "=?", filter, null);
+						 
+					        while (genericCursor.moveToNext())
+					        {
+					        	String organisation = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA1));
+					            String title = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA4));
+					            String MIMETYPE_ORG = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.MIMETYPE));
+					            
+					            
+					            if ((organisation != null) && (title != null)&&(MIMETYPE_ORG.equals("vnd.android.cursor.item/organization")))
+					           {
+					            	Log.v(TAG, "for contactID of " + contactID + "organisation is " + organisation + "title is " + title + " type is " + MIMETYPE_ORG);
+					           }
+					        
+					       
+					            String IMtype = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.PROTOCOL));
+					            String IMvalue = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.DATA1));
+					            String MIMETYPE_IM = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.MIMETYPE));
+					            
+						            if ((IMtype != null) && (IMvalue != null) && (MIMETYPE_IM.equals("vnd.android.cursor.item/im")))
+						            {
+						            	//json object here
+						            }
+					        
+						            String websiteVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.URL));
+						            String MIMETYPE_URL = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.MIMETYPE));
+						            
+						            if ((websiteVal != null)&&(MIMETYPE_URL.equals("vnd.android.cursor.item/website")))
+						            {
+						            	//json object here
+						            }
+					            
+					        
+						            String notesVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.NOTE));
+						            String MIMETYPE_NOTE = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.MIMETYPE));
+						            
+						            if ((notesVal != null) && (MIMETYPE_NOTE.equals("vnd.android.cursor.item/note")))
+						            {
+						            	//json object here
+						            }
+						        }
 						
 					}
 				}
