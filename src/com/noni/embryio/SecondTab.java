@@ -448,7 +448,7 @@ public class SecondTab extends Fragment implements OnClickListener, UpdateableFr
 			int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 			if (deleted != 1)
 			{
-				Log.e(TAG, "name is " + name);
+				Log.v(TAG, "name is " + name);
 			
 			
 				if ( (C.getString(C.getColumnIndex(RawContacts.ACCOUNT_NAME)) != null) 

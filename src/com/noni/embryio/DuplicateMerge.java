@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.RawContacts;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -142,6 +143,34 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						
 						Cursor phoneCursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  
 								null, Phone.CONTACT_ID + "=?", filter, null);
+						
+						while (phoneCursor.moveToNext())
+						{
+							int type = phoneCursor.getInt(phoneCursor.getColumnIndex(Phone.TYPE));
+							
+							String numType = ""+type;
+							String num = phoneCursor.getString(phoneCursor.getColumnIndex(Phone.NUMBER));
+							if ((num != null) && (numType != null))
+							{
+								Log.v(TAG, "for contact ID of " + contactID + "the number is " + num +  " and the number type is " + numType);
+							}
+						}
+						
+						Cursor emailCursor = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, Phone.CONTACT_ID + "=?", filter, null);
+						
+						 while(emailCursor.moveToNext())
+					        {
+					        	int type = emailCursor.getInt(emailCursor.getColumnIndex(CommonDataKinds.Email.TYPE));
+					        	String emailType = "" + type;
+					            String email = emailCursor.getString(emailCursor.getColumnIndex(CommonDataKinds.Email.ADDRESS));
+					          
+					            if ((email != null) && (emailType != null))
+					            {
+					            	
+					            	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
+					            }
+					        }
+						
 					}
 				}
 			}
