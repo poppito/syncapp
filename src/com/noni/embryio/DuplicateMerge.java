@@ -117,8 +117,8 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	
 	public void findContactInfo(ArrayList<String> mergeDup)
 	{
-		Log.v(TAG, "merge dup contents are " + mergeDup.toString());
 		ContentResolver cr = getContentResolver();
+		ArrayList<String> duplicateContactIDs = new ArrayList<String>();
 		String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.DELETED};
 		String name;
 		
@@ -126,9 +126,9 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		{
 			Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
 			name = mergeDup.get(x);
+			Log.v(TAG, "merge dup contents are " + mergeDup.toString());
 			while (C.moveToNext())
 			{
-				
 				if (name.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
 				{
 					
