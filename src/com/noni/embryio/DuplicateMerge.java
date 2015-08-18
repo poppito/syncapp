@@ -87,7 +87,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  {
 			    String key=(String)dispMapIterator.next();
 			    String value = String.valueOf(dispMap.get(key));
-			    dispList.add(key + " (" + value + " duplicates))"); 
+			    dispList.add(key + " (" + value + " duplicates)"); 
 		  }
 		  
 		 // Log.v(TAG, dispList.toString() + " contents of display list");
@@ -106,7 +106,6 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 				finish();
 				break;
 			}
-			
 			case (R.id.mergeButton):
 			{
 				break;
@@ -155,7 +154,6 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 				{
 					
 					String ContactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
-					Log.v(TAG, "for name " + name + " contact ID is " + ContactID);
 					int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 					if (deleted != 1)
 					{
@@ -167,6 +165,8 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						Cursor phoneCursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  
 								null, Phone.CONTACT_ID + "=?", filter, null);
 						
+						Log.v(TAG, "For name of " + name + " contactIDs are " + contactID);
+						
 						while (phoneCursor.moveToNext())
 						{
 							int type = phoneCursor.getInt(phoneCursor.getColumnIndex(Phone.TYPE));
@@ -175,7 +175,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 							String num = phoneCursor.getString(phoneCursor.getColumnIndex(Phone.NUMBER));
 							if ((num != null) && (numType != null))
 							{
-								Log.v(TAG, "for contact ID of " + contactID + "the number is " + num +  " and the number type is " + numType);
+								//Log.v(TAG, "for contact ID of " + contactID + "the number is " + num +  " and the number type is " + numType);
 							}
 						}
 						
@@ -190,7 +190,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 					            if ((email != null) && (emailType != null))
 					            {
 					            	
-					            	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
+					            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
 					            }
 					        }
 						 
@@ -206,7 +206,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 					            if ((address != null) && (type != null))
 					            {
 					            	
-					            	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + address +  " and the email address type is " + type);
+					            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + address +  " and the email address type is " + type);
 					            	
 					            }
 					        }
@@ -224,7 +224,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 					            
 					            if ((organisation != null) && (title != null)&&(MIMETYPE_ORG.equals("vnd.android.cursor.item/organization")))
 					           {
-					            	Log.v(TAG, "for contactID of " + contactID + "organisation is " + organisation + "title is " + title + " type is " + MIMETYPE_ORG);
+					            //	Log.v(TAG, "for contactID of " + contactID + "organisation is " + organisation + "title is " + title + " type is " + MIMETYPE_ORG);
 					           }
 					        
 					       
@@ -234,7 +234,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 					            
 						            if ((IMtype != null) && (IMvalue != null) && (MIMETYPE_IM.equals("vnd.android.cursor.item/im")))
 						            {
-						            	//json object here
+						            	
 						            }
 					        
 						            String websiteVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.URL));
@@ -242,7 +242,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						            
 						            if ((websiteVal != null)&&(MIMETYPE_URL.equals("vnd.android.cursor.item/website")))
 						            {
-						            	//json object here
+						            	
 						            }
 					            
 					        
@@ -251,7 +251,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						            
 						            if ((notesVal != null) && (MIMETYPE_NOTE.equals("vnd.android.cursor.item/note")))
 						            {
-						            	//json object here
+						            	
 						            }
 						        }
 						
