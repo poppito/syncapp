@@ -42,8 +42,11 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  mergeContacts = (ListView)findViewById(R.id.mergeContacts);
 		  Intent intent = getIntent();
 		  mergeDuplicates = intent.getStringArrayListExtra("duplicateContacts");
+		  Log.v(TAG , "mergeDuplicates contents are " + mergeDuplicates.toString());
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
-		  findContactInfo(mergeDuplicates);
+		  Log.v(TAG, "mergeSyncedContacts contents are " + mergeSyncedContacts.toString());
+		  ArrayList<String> onlyUniques = onlyUniques(mergeDuplicates);
+		  findContactInfo(onlyUniques);
 		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
 		  displayList = getDisplayList(displayMap);
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
@@ -70,7 +73,6 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			dupName = tempDupHolder.get(x);
 			countDuplicates = Collections.frequency(tempDupHolder, dupName);
 			tempDupHolder.removeAll(Collections.singleton(dupName));
-			//Log.v(TAG, dupName + " occurs " + countDuplicates + " times");
 			dupContacts.put(dupName, countDuplicates);
 		  }
 		return dupContacts;
@@ -112,6 +114,26 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		}
 	}
 	
+	
+	public ArrayList<String> onlyUniques(ArrayList<String> dupContacts)
+	{
+		String name;
+		
+		ArrayList<String> duplicates = new ArrayList<String>(dupContacts);
+		
+		ArrayList<String> onlyUniques = new ArrayList<String>();
+		for (int i=0; i<duplicates.size(); i++)
+		{
+			name = duplicates.get(i);
+			onlyUniques.add(name);
+			duplicates.remove(name);
+			
+		}
+		
+		Log.v(TAG, "contents of onlyUniques is " + onlyUniques.toString());
+		
+		return onlyUniques;
+	}
 	
 	
 	
