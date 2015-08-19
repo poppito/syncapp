@@ -1,5 +1,4 @@
 package com.noni.embryio;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,7 +45,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
 		  Log.v(TAG, "mergeSyncedContacts contents are " + mergeSyncedContacts.toString());
 		  ArrayList<String> onlyUniques = onlyUniques(mergeDuplicates);
-		  findContactInfo(onlyUniques);
+		  findContactIDs(onlyUniques);
 		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
 		  displayList = getDisplayList(displayMap);
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
@@ -136,10 +135,11 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	
 	
 	
-	public void findContactInfo(ArrayList<String> mergeDup)
+	public void findContactIDs(ArrayList<String> mergeDup)
 	{
 		ContentResolver cr = getContentResolver();
-		ArrayList<String> duplicateContactIDs = new ArrayList<String>();
+		HashMap <String, String> contactIDs = new HashMap<String, String>();
+		
 		String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.DELETED};
 		String name;
 		
@@ -148,117 +148,131 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			Cursor C = cr.query(RawContacts.CONTENT_URI, proj, null, null, null);
 			name = mergeDup.get(x);
 			Log.v(TAG, "merge dup contents are " + mergeDup.toString());
+			
+			
 			while (C.moveToNext())
 			{
-				if (name.equals(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
+				if (name.equalsIgnoreCase(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
 				{
+					
 					
 					String ContactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
 					int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
+	
 					if (deleted != 1)
 					{
 						Log.v(TAG, "found contact! " + name);
 						
-						String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
-						String[] filter = {contactID};
-						
-						Cursor phoneCursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  
-								null, Phone.CONTACT_ID + "=?", filter, null);
-						
+						String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));						
 						Log.v(TAG, "For name of " + name + " contactIDs are " + contactID);
+						contactIDs.put(contactID, name);
+				
 						
-						while (phoneCursor.moveToNext())
-						{
-							int type = phoneCursor.getInt(phoneCursor.getColumnIndex(Phone.TYPE));
-							
-							String numType = ""+type;
-							String num = phoneCursor.getString(phoneCursor.getColumnIndex(Phone.NUMBER));
-							if ((num != null) && (numType != null))
-							{
-								//Log.v(TAG, "for contact ID of " + contactID + "the number is " + num +  " and the number type is " + numType);
-							}
 						}
-						
-						Cursor emailCursor = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, Phone.CONTACT_ID + "=?", filter, null);
-						
-						 while(emailCursor.moveToNext())
-					        {
-					        	int type = emailCursor.getInt(emailCursor.getColumnIndex(CommonDataKinds.Email.TYPE));
-					        	String emailType = "" + type;
-					            String email = emailCursor.getString(emailCursor.getColumnIndex(CommonDataKinds.Email.ADDRESS));
-					          
-					            if ((email != null) && (emailType != null))
-					            {
-					            	
-					            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
-					            }
-					        }
-						 
-						 
-					        Cursor addressCursor = cr.query(ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,  
-									null, CommonDataKinds.StructuredPostal.CONTACT_ID + "=?", filter, null);
-					        
-					        while(addressCursor.moveToNext())
-					        {
-					        	String type = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.TYPE));
-					            String address = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS));
-					          
-					            if ((address != null) && (type != null))
-					            {
-					            	
-					            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + address +  " and the email address type is " + type);
-					            	
-					            }
-					        }
-					        
-					        
-					        Cursor genericCursor = cr.query(Data.CONTENT_URI,  
-									null, Data.CONTACT_ID + "=?", filter, null);
-						 
-					        while (genericCursor.moveToNext())
-					        {
-					        	String organisation = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA1));
-					            String title = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA4));
-					            String MIMETYPE_ORG = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.MIMETYPE));
-					            
-					            
-					            if ((organisation != null) && (title != null)&&(MIMETYPE_ORG.equals("vnd.android.cursor.item/organization")))
-					           {
-					            //	Log.v(TAG, "for contactID of " + contactID + "organisation is " + organisation + "title is " + title + " type is " + MIMETYPE_ORG);
-					           }
-					        
-					       
-					            String IMtype = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.PROTOCOL));
-					            String IMvalue = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.DATA1));
-					            String MIMETYPE_IM = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.MIMETYPE));
-					            
-						            if ((IMtype != null) && (IMvalue != null) && (MIMETYPE_IM.equals("vnd.android.cursor.item/im")))
-						            {
-						            	
-						            }
-					        
-						            String websiteVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.URL));
-						            String MIMETYPE_URL = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.MIMETYPE));
-						            
-						            if ((websiteVal != null)&&(MIMETYPE_URL.equals("vnd.android.cursor.item/website")))
-						            {
-						            	
-						            }
-					            
-					        
-						            String notesVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.NOTE));
-						            String MIMETYPE_NOTE = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.MIMETYPE));
-						            
-						            if ((notesVal != null) && (MIMETYPE_NOTE.equals("vnd.android.cursor.item/note")))
-						            {
-						            	
-						            }
-						        }
-						
-					}
-				}
 			}
 			C.close();
 		}
-	}
+	}	
 }
+	
+		
+	public void findContactInfo()
+	{
+		String contactID = "";
+		String[] filter = {contactID};
+		
+		Cursor phoneCursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  
+				null, Phone.CONTACT_ID + "=?", filter, null);
+		
+			while (phoneCursor.moveToNext())
+			{
+				int type = phoneCursor.getInt(phoneCursor.getColumnIndex(Phone.TYPE));
+				
+				String numType = ""+type;
+				String num = phoneCursor.getString(phoneCursor.getColumnIndex(Phone.NUMBER));
+				if ((num != null) && (numType != null))
+				{
+					//Log.v(TAG, "for contact ID of " + contactID + "the number is " + num +  " and the number type is " + numType);
+				}
+			}
+			
+			Cursor emailCursor = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, Phone.CONTACT_ID + "=?", filter, null);
+			
+			 while(emailCursor.moveToNext())
+		        {
+		        	int type = emailCursor.getInt(emailCursor.getColumnIndex(CommonDataKinds.Email.TYPE));
+		        	String emailType = "" + type;
+		            String email = emailCursor.getString(emailCursor.getColumnIndex(CommonDataKinds.Email.ADDRESS));
+		          
+		            if ((email != null) && (emailType != null))
+		            {
+		            	
+		            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + email +  " and the email address type is " + emailType);
+		            }
+		        }
+			 
+			 
+		        Cursor addressCursor = cr.query(ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,  
+						null, CommonDataKinds.StructuredPostal.CONTACT_ID + "=?", filter, null);
+		        
+		        while(addressCursor.moveToNext())
+		        {
+		        	String type = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.TYPE));
+		            String address = addressCursor.getString(addressCursor.getColumnIndex(CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS));
+		          
+		            if ((address != null) && (type != null))
+		            {
+		            	
+		            //	Log.v(TAG, "for contact ID of " + contactID + "the email address is " + address +  " and the email address type is " + type);
+		            	
+		            }
+		        }
+		        
+		        
+		        Cursor genericCursor = cr.query(Data.CONTENT_URI,  
+						null, Data.CONTACT_ID + "=?", filter, null);
+			 
+		        while (genericCursor.moveToNext())
+		        {
+		        	String organisation = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA1));
+		            String title = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.DATA4));
+		            String MIMETYPE_ORG = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Organization.MIMETYPE));
+		            
+		            
+		            if ((organisation != null) && (title != null)&&(MIMETYPE_ORG.equals("vnd.android.cursor.item/organization")))
+		           {
+		            //	Log.v(TAG, "for contactID of " + contactID + "organisation is " + organisation + "title is " + title + " type is " + MIMETYPE_ORG);
+		           }
+		        
+		       
+		            String IMtype = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.PROTOCOL));
+		            String IMvalue = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.DATA1));
+		            String MIMETYPE_IM = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Im.MIMETYPE));
+		            
+			            if ((IMtype != null) && (IMvalue != null) && (MIMETYPE_IM.equals("vnd.android.cursor.item/im")))
+			            {
+			            	
+			            }
+		        
+			            String websiteVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.URL));
+			            String MIMETYPE_URL = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Website.MIMETYPE));
+			            
+			            if ((websiteVal != null)&&(MIMETYPE_URL.equals("vnd.android.cursor.item/website")))
+			            {
+			            	
+			            }
+		            
+		        
+			            String notesVal = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.NOTE));
+			            String MIMETYPE_NOTE = genericCursor.getString(genericCursor.getColumnIndex(CommonDataKinds.Note.MIMETYPE));
+			            
+			            if ((notesVal != null) && (MIMETYPE_NOTE.equals("vnd.android.cursor.item/note")))
+			            {
+			            	
+			            }
+			        }
+			
+		}
+
+}
+		
