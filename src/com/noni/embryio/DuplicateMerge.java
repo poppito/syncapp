@@ -45,7 +45,8 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
 		  Log.v(TAG, "mergeSyncedContacts contents are " + mergeSyncedContacts.toString());
 		  ArrayList<String> onlyUniques = onlyUniques(mergeDuplicates);
-		  findContactIDs(onlyUniques);
+		  HashMap <String, String> duplicateIDs = findContactIDs(onlyUniques);
+		  getRedundantIDs(duplicateIDs);
 		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
 		  displayList = getDisplayList(displayMap);
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
@@ -135,7 +136,7 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	
 	
 	
-	public void findContactIDs(ArrayList<String> mergeDup)
+	public HashMap<String, String> findContactIDs(ArrayList<String> mergeDup)
 	{
 		ContentResolver cr = getContentResolver();
 		HashMap <String, String> contactIDs = new HashMap<String, String>();
@@ -166,14 +167,34 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));						
 						Log.v(TAG, "For name of " + name + " contactIDs are " + contactID);
 						contactIDs.put(contactID, name);
-				
-						
-						}
+					}
 			}
-			C.close();
 		}
+			C.close();
 	}	
+		return contactIDs;
 }
+	
+	public void getRedundantIDs(HashMap<String, String> contactIDs)
+	{
+		String[] duplicateContacts = {};
+		String value = "", prevValue = "";
+		Iterator mapIterator = contactIDs.keySet().iterator();
+		//Log.v(TAG, "Hashmap with names and ContactIDs of the duplicates is " + contactIDs.toString());
+		{
+			while(mapIterator.hasNext())
+			{
+				String key = (String)mapIterator.next();
+				prevValue = value;
+				value = (String)contactIDs.get(key);
+				if (value.equals(prevValue))
+				{
+					//do something here next
+					Log.v(TAG, "values matched " + prevValue + value);
+				}
+			}
+		}
+	}
 	
 		
 	public void findContactInfo()
