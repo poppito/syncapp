@@ -178,26 +178,17 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	public void getRedundantIDs(HashMap<String, String> contactIDs)
 	{
 		ArrayList<String> duplicateContactAccountIDs = new ArrayList<String>();
-		String value = "", prevValue = "", key = "", prevKey = "";
-		Iterator mapIterator = contactIDs.keySet().iterator();
-		//Log.v(TAG, "Hashmap with names and ContactIDs of the duplicates is " + contactIDs.toString());
+		String value = "", key = "";
+		//Iterator mapIterator = contactIDs.keySet().iterator();		
 		{
-			while(mapIterator.hasNext())
-			{
-	
-				key = (String)mapIterator.next();
-				value = (String)contactIDs.get(key);
-				for (String s: contactIDs.keySet())
+				for (String s: contactIDs.values())
 				{
-					if ((contactIDs.get(s)).equals(value))
+					if (contactIDs.containsValue(s))
 					{
-						duplicateContactAccountIDs.add(key);
+						
 					}
 				}
-				
 			}
-		}
-		Log.v(TAG, "contents of dup account ids is " + duplicateContactAccountIDs.toString());
 	}
 	
 		
