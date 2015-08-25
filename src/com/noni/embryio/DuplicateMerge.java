@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
@@ -178,17 +179,18 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	public void getRedundantIDs(HashMap<String, String> contactIDs)
 	{
 		ArrayList<String> duplicateContactAccountIDs = new ArrayList<String>();
-		String value = "", key = "";
+		String[] keySet;
+		String[] valueSet;
+	
 		//Iterator mapIterator = contactIDs.keySet().iterator();		
 		{
-				for (String s: contactIDs.values())
-				{
-					if (contactIDs.containsValue(s))
-					{
-						
-					}
-				}
+			keySet = (String[]) contactIDs.keySet().toArray();
+			valueSet = (String[]) contactIDs.values().toArray();
+			
+			for (int x=0; x<keySet.length; x++)
+			{
 			}
+		}
 	}
 	
 		
