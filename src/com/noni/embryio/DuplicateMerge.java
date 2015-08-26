@@ -156,8 +156,6 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 			{
 				if (name.equalsIgnoreCase(C.getString(C.getColumnIndex(RawContacts.DISPLAY_NAME_PRIMARY))))
 				{
-					
-					
 					String ContactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));
 					int deleted = C.getInt(C.getColumnIndex(RawContacts.DELETED));
 	
@@ -179,18 +177,24 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	public void getRedundantIDs(HashMap<String, String> contactIDs)
 	{
 		ArrayList<String> duplicateContactAccountIDs = new ArrayList<String>();
-		String[] keySet;
-		String[] valueSet;
+		ArrayList<String> redundantValues = new ArrayList<String>();
+		String value;
 	
-		//Iterator mapIterator = contactIDs.keySet().iterator();		
-		{
-			keySet = (String[]) contactIDs.keySet().toArray();
-			valueSet = (String[]) contactIDs.values().toArray();
-			
-			for (int x=0; x<keySet.length; x++)
+		Iterator mapIterator = contactIDs.keySet().iterator();		
+		
+		
+			for (String key: contactIDs.keySet())
 			{
-			}
-		}
+				value = contactIDs.get(key);
+				if (!(redundantValues.contains(value)))
+				{
+					duplicateContactAccountIDs.add(key);
+					Log.v(TAG, "key is " + key + " value is " + value);
+				}
+				redundantValues.add(value);
+				Log.v(TAG, duplicateContactAccountIDs.toString() + " are keys");
+				Log.v(TAG, redundantValues.toString() + " redundant values");
+			}	
 	}
 	
 		
