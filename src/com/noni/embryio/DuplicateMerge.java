@@ -46,8 +46,9 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 		  mergeSyncedContacts = intent.getStringArrayListExtra("syncedContacts");
 		  Log.v(TAG, "mergeSyncedContacts contents are " + mergeSyncedContacts.toString());
 		  ArrayList<String> onlyUniques = onlyUniques(mergeDuplicates);
-		  HashMap <String, String> duplicateIDs = findContactIDs(onlyUniques);
-		  getRedundantIDs(duplicateIDs);
+		 // HashMap <String, String> duplicateIDs = findContactIDs(onlyUniques);
+		  findContactIDs(onlyUniques);
+	//	  getRedundantIDs(duplicateIDs);
 		  Map<String, Integer> displayMap = findAllDuplicates(mergeDuplicates);
 		  displayList = getDisplayList(displayMap);
 		  mergeArrayAdapter = new ArrayAdapter<String>(DuplicateMerge.this, android.R.layout.simple_list_item_multiple_choice, displayList);
@@ -137,10 +138,12 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 	
 	
 	
-	public HashMap<String, String> findContactIDs(ArrayList<String> mergeDup)
+	public void findContactIDs(ArrayList<String> mergeDup)
 	{
 		ContentResolver cr = getContentResolver();
-		HashMap <String, String> contactIDs = new HashMap<String, String>();
+		//HashMap <String, String> contactIDs = new HashMap<String, String>();
+		ArrayList<String> contactIDs = new ArrayList<String>();
+		ArrayList<String> contactNames = new ArrayList<String>();
 		
 		String[] proj = {RawContacts.DISPLAY_NAME_PRIMARY, RawContacts.CONTACT_ID, RawContacts.DELETED};
 		String name;
@@ -165,18 +168,30 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 						
 						String contactID = C.getString(C.getColumnIndex(RawContacts.CONTACT_ID));						
 						Log.v(TAG, "For name of " + name + " contactIDs are " + contactID);
-						contactIDs.put(contactID, name);
+						//contactIDs.put(contactID, name);
+						contactIDs.add(contactID);
+						contactNames.add(name);
 					}
 			}
 		}
 			C.close();
 	}	
-		return contactIDs;
+		
+		
 }
 	
-	public void getRedundantIDs(HashMap<String, String> contactIDs)
+	
+	
+	public void getRedundantIDs(ArrayList<String> contactIDs, ArrayList<String> contactNames)
 	{
-		ArrayList<String> duplicateContactAccountIDs = new ArrayList<String>();
+		for (int i=0; i<contactNames.size(); i++)
+		{		
+			String currentContactName = contactNames.get(i);
+			
+			Log.v(TAG, currentContactName + " is current Contact name");
+		}
+		
+		/*ArrayList<String> duplicateContactAccountIDs = new ArrayList<String>();
 		ArrayList<String> redundantValues = new ArrayList<String>();
 		String value;
 	
@@ -194,8 +209,8 @@ public class DuplicateMerge extends FragmentActivity implements OnClickListener 
 				redundantValues.add(value);
 				Log.v(TAG, duplicateContactAccountIDs.toString() + " are keys");
 				Log.v(TAG, redundantValues.toString() + " redundant values");
-			}	
-	}
+			}	*/
+	} 
 	
 		
 	public void findContactInfo()
